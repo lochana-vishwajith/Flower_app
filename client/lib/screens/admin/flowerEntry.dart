@@ -21,6 +21,10 @@ class _FlowerEntryState extends State<FlowerEntry> {
   late String _bloom;
   late String _description;
 
+  showData() {
+    print(_kingdom + " " + _family + " " + _tribe);
+  }
+
   Widget _InputKingdomField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -148,6 +152,20 @@ class _FlowerEntryState extends State<FlowerEntry> {
     print(images!.path.toString());
   }
 
+  // Widget flowerForm(){
+  //   return SingleChildScrollView(
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(bottom: 8.0,top: 8.0),
+  //           child: FormHelper.,
+  //           )
+  //       ],
+  //     ),
+  //   )
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,7 +210,9 @@ class _FlowerEntryState extends State<FlowerEntry> {
               width: 150,
               child: ElevatedButton(
                 child: const Text('ADD'),
-                onPressed: () {},
+                onPressed: () {
+                  showData();
+                },
               ),
             ),
           ]),
