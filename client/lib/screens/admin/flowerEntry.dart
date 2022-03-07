@@ -286,7 +286,9 @@ class _FlowerEntryState extends State<FlowerEntry> {
         title: const Text('Flower Entry'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_rounded),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: SingleChildScrollView(
