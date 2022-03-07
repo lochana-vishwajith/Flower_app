@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:client/models/flower_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 
 class FlowerEntry extends StatefulWidget {
   const FlowerEntry({Key? key}) : super(key: key);
@@ -10,162 +14,271 @@ class FlowerEntry extends StatefulWidget {
 
 class _FlowerEntryState extends State<FlowerEntry> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ImagePicker _imagePicker = ImagePicker();
-  List<XFile>? _imageList = [];
+  FlowerModel? flowerModel;
+  bool isEditMode = false;
+  bool isImageSelected = false;
 
-  late String _kingdom;
-  late String _family;
-  late String _tribe;
-  late String _genus;
-  late String _synonym;
-  late String _bloom;
-  late String _description;
-
-  showData() {
-    print(_kingdom + " " + _family + " " + _tribe);
+  @override
+  void initState() {
+    super.initState();
+    flowerModel = FlowerModel();
   }
 
-  Widget _InputKingdomField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Kingdom',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _kingdom = value.toString();
-      },
+  Widget flowerForm() {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          flowerImagePicker(isImageSelected, flowerModel!.imageUrl ?? "",
+              (file) {
+            setState(() {
+              flowerModel!.imageUrl = file.path;
+              isImageSelected = true;
+            });
+          }),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: FormHelper.inputFieldWidget(
+                context, "Kingdom", "Enter Kingdom", (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Kingdom can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.kingdom = onSaved;
+            },
+                initialValue: flowerModel!.kingdom ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FormHelper.inputFieldWidget(
+                context, "Family", "Enter Family", (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Family can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.family = onSaved;
+            },
+                initialValue: flowerModel!.family ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FormHelper.inputFieldWidget(context, "Tribe", "Enter Tribe",
+                (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Tribe can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.tribe = onSaved;
+            },
+                initialValue: flowerModel!.tribe ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FormHelper.inputFieldWidget(context, "Genus", "Enter Genus",
+                (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Genus can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.genus = onSaved;
+            },
+                initialValue: flowerModel!.genus ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FormHelper.inputFieldWidget(
+                context, "Synonyms", "Enter Synonyms", (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Synonyms can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.synonym = onSaved;
+            },
+                initialValue: flowerModel!.synonym ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FormHelper.inputFieldWidget(
+                context, "BloomingSeasons", "Enter Blooming Seasons",
+                (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Blooming Seasons can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.bloom = onSaved;
+            },
+                initialValue: flowerModel!.bloom ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FormHelper.inputFieldWidget(
+                context, "Description", "Enter Description", (onValidateValue) {
+              if (onValidateValue.isEmpty) {
+                return "Description can't be empty";
+              }
+              return null;
+            }, (onSaved) {
+              flowerModel?.description = onSaved;
+            },
+                initialValue: flowerModel!.description ?? "",
+                borderColor: Color.fromARGB(255, 82, 115, 77),
+                borderFocusColor: Color.fromARGB(255, 121, 180, 112),
+                textColor: Colors.black,
+                hintColor: Colors.black.withOpacity(.5),
+                borderRadius: 10.0,
+                showPrefixIcon: false,
+                isMultiline: true,
+                multilineRows: 5),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: FormHelper.submitButton("Add Flower", () {
+              if (saveForm()) {
+                //API call
+              }
+            },
+                    btnColor: Color.fromARGB(255, 82, 115, 77),
+                    borderColor: Color.fromARGB(255, 82, 115, 77),
+                    width: 161.0,
+                    height: 36.0)),
+          )
+        ],
+      ),
     );
   }
 
-  Widget _InputFamilyField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Family',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _family = value.toString();
-      },
-    );
+  bool saveForm() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    }
+
+    return false;
   }
 
-  Widget _InputTribeField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Tribe',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _tribe = value.toString();
-      },
-    );
-  }
+  static Widget flowerImagePicker(
+    bool isImageSelected,
+    String imageName,
+    Function onImagePicked,
+  ) {
+    Future<XFile?> _imageFie;
+    ImagePicker _imagePicker = ImagePicker();
 
-  Widget _InputGenusField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Genus',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _genus = value.toString();
-      },
-    );
-  }
-
-  Widget _InputSynonymField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Synonyms',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _synonym = value.toString();
-      },
-    );
-  }
-
-  Widget _InputBloomingField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Blooming Seasons',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _bloom = value.toString();
-      },
-    );
-  }
-
-  Widget _InputDescriptionField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: 'Enter Description',
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 82, 115, 77), width: 0.8))),
-      onSaved: (value) {
-        _description = value.toString();
-      },
-      maxLines: 7,
-    );
-  }
-
-  Widget _InputImages() {
-    return Stack(
+    return Column(
       children: [
-        OutlinedButton(
-          onPressed: () {
-            selectImages();
-          },
-          child: Text('Select Images'),
-        ),
-        Expanded(
-          child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemCount: 2,
-              itemBuilder: (BuildContext context, int index) {
-                return const Text('Hello');
-              }),
+        imageName.isNotEmpty
+            ? isImageSelected
+                ? Image.file(
+                    File(imageName),
+                    height: 200,
+                    width: 200,
+                  )
+                : SizedBox(
+                    child: Image.network(
+                      imageName,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.scaleDown,
+                    ),
+                  )
+            : SizedBox(
+                child: Image.network(
+                  "https://www.babypillowth.com/images/templates/upload.png",
+                  width: 150,
+                  height: 150,
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30.0,
+              width: 30.0,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0),
+                  icon: const Icon(
+                    Icons.image,
+                    size: 30.0,
+                  ),
+                  onPressed: () {
+                    _imageFie =
+                        _imagePicker.pickImage(source: ImageSource.gallery);
+                    _imageFie.then((file) async {
+                      onImagePicked(file);
+                    });
+                  }),
+            ),
+            SizedBox(
+                height: 30.0,
+                width: 30.0,
+                child: IconButton(
+                    padding: const EdgeInsets.all(0),
+                    icon: const Icon(
+                      Icons.camera,
+                      size: 30.0,
+                    ),
+                    onPressed: () {
+                      _imageFie =
+                          _imagePicker.pickImage(source: ImageSource.camera);
+                      _imageFie.then((file) async {
+                        onImagePicked(file);
+                      });
+                    }))
+          ],
         )
       ],
     );
   }
 
-  void selectImages() async {
-    final XFile? images =
-        await _imagePicker.pickImage(source: ImageSource.gallery);
-    print(images!.path.toString());
-  }
-
-  // Widget flowerForm(){
-  //   return SingleChildScrollView(
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.start,
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Padding(
-  //           padding: const EdgeInsets.only(bottom: 8.0,top: 8.0),
-  //           child: FormHelper.,
-  //           )
-  //       ],
-  //     ),
-  //   )
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,43 +292,7 @@ class _FlowerEntryState extends State<FlowerEntry> {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _InputKingdomField(),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(8.0), child: _InputFamilyField()),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _InputTribeField(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _InputGenusField(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _InputSynonymField(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _InputBloomingField(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _InputDescriptionField(),
-            ),
-            SizedBox(
-              width: 150,
-              child: ElevatedButton(
-                child: const Text('ADD'),
-                onPressed: () {
-                  showData();
-                },
-              ),
-            ),
-          ]),
+          child: flowerForm(),
         ),
       ),
     );
