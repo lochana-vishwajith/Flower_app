@@ -1,4 +1,5 @@
 class FlowerModel {
+  late String? id;
   late String? family;
   late String? tribe;
   late String? kingdom;
@@ -9,6 +10,7 @@ class FlowerModel {
   late String? imageUrl;
 
   FlowerModel({
+    this.id,
     this.family,
     this.tribe,
     this.kingdom,
@@ -20,6 +22,7 @@ class FlowerModel {
   });
 
   FlowerModel.fromJson(Map<String, String> json) {
+    id = json["id"];
     family = json["family"];
     tribe = json["tribe"];
     kingdom = json["kingdom"];

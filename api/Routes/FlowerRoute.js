@@ -8,6 +8,7 @@ router.post("/",(req,res)=>{
         genus,
         tribe,
         bloom,
+        synonyms,
         description,
         imageURL,
     } = req.body;
@@ -18,6 +19,7 @@ router.post("/",(req,res)=>{
         genus,
         tribe,
         bloom,
+        synonyms,
         description,
         imageURL,
     });

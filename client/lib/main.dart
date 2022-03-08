@@ -1,4 +1,5 @@
 import 'package:client/screens/admin/flowerEntry.dart';
+import 'package:client/screens/admin/flowerList.dart';
 import 'package:client/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/adminAdd': (context) => const FlowerEntry(),
+        '/adminAdd': (context) => const FlowerList(),
+        // '/adminAdd': (context) => const FlowerEntry(),
       },
     );
   }
