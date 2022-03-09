@@ -1,3 +1,6 @@
+List<FlowerModel> flowersFromJson(dynamic str) =>
+    List<FlowerModel>.from((str).map((e) => FlowerModel.fromJson(e)));
+
 class FlowerModel {
   late String? id;
   late String? family;

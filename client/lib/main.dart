@@ -23,8 +23,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/adminAdd': (context) => const FlowerList(),
-        // '/adminAdd': (context) => const FlowerEntry(),
+        '/adminList': (context) => const FlowerList(),
+        '/adminAdd': (context) => const FlowerEntry(),
+        '/adminEdit': (context) => const FlowerEntry(),
       },
     );
   }

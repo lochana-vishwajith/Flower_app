@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:client/models/flower_model.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +68,10 @@ class FlowerItem extends StatelessWidget {
                   children: [
                     GestureDetector(
                       child: const Icon(Icons.edit),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/adminEdit',
+                            arguments: {'model': model});
+                      },
                     ),
                     GestureDetector(
                       child: const Icon(Icons.delete_forever_outlined),
