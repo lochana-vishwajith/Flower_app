@@ -17,6 +17,9 @@ const connection = mongoose.connection;
 const Flower = require("./Routes/FlowerRoute");
 app.use("/flower",Flower);
 
+const Forum = require("./Routes/forumRoutes");
+app.use("/forum",Forum);
+
 connection.once("open", () => {
     console.log("Mongo DB connected");
 });
