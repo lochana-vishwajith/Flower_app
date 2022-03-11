@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:client/config.dart';
 import 'package:client/models/flower_model.dart';
+import 'package:client/service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
+import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 class FlowerEntry extends StatefulWidget {
   const FlowerEntry({Key? key}) : super(key: key);
@@ -17,11 +20,22 @@ class _FlowerEntryState extends State<FlowerEntry> {
   FlowerModel? flowerModel;
   bool isEditMode = false;
   bool isImageSelected = false;
+  bool isAPICallProcess = false;
 
   @override
   void initState() {
     super.initState();
     flowerModel = FlowerModel();
+
+    Future.delayed(Duration.zero, (() {
+      if (ModalRoute.of(context)?.settings.arguments != null) {
+        final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+
+        flowerModel = arguments['model'];
+        isEditMode = true;
+        setState(() {});
+      }
+    }));
   }
 
   Widget flowerForm() {
@@ -30,6 +44,9 @@ class _FlowerEntryState extends State<FlowerEntry> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           flowerImagePicker(isImageSelected, flowerModel!.imageUrl ?? "",
               (file) {
             setState(() {
@@ -181,7 +198,26 @@ class _FlowerEntryState extends State<FlowerEntry> {
             child: Center(
                 child: FormHelper.submitButton("Add Flower", () {
               if (saveForm()) {
-                //API call
+                setState(() {
+                  isAPICallProcess = true;
+                });
+
+                Service.saveFlower(flowerModel!, isEditMode, isImageSelected)
+                    .then((response) {
+                  setState(() {
+                    isAPICallProcess = false;
+                  });
+                  if (response) {
+                    print(response);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/adminList', (route) => false);
+                  } else {
+                    FormHelper.showSimpleAlertDialog(
+                        context, Config.appName, "Error", "OK", () {
+                      Navigator.of(context).pop();
+                    });
+                  }
+                });
               }
             },
                     btnColor: Color.fromARGB(255, 82, 115, 77),
@@ -218,22 +254,22 @@ class _FlowerEntryState extends State<FlowerEntry> {
             ? isImageSelected
                 ? Image.file(
                     File(imageName),
-                    height: 200,
-                    width: 200,
+                    height: 100,
+                    width: 100,
                   )
                 : SizedBox(
                     child: Image.network(
                       imageName,
-                      width: 200,
-                      height: 200,
+                      width: 100,
+                      height: 100,
                       fit: BoxFit.scaleDown,
                     ),
                   )
             : SizedBox(
                 child: Image.network(
                   "https://www.babypillowth.com/images/templates/upload.png",
-                  width: 150,
-                  height: 150,
+                  width: 100,
+                  height: 100,
                   fit: BoxFit.scaleDown,
                 ),
               ),
@@ -291,11 +327,13 @@ class _FlowerEntryState extends State<FlowerEntry> {
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body: ProgressHUD(
         child: Form(
           key: _formKey,
           child: flowerForm(),
         ),
+        inAsyncCall: isAPICallProcess,
+        key: UniqueKey(),
       ),
     );
   }
