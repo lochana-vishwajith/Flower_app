@@ -1,4 +1,5 @@
 import 'package:client/screens/admin/flowerEntry.dart';
+import 'package:client/screens/forum/start_conversation.dart';
 import 'package:client/screens/admin/flowerList.dart';
 import 'package:client/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
         secondaryHeaderColor: Colors.white,
-        scaffoldBackgroundColor: Color.fromARGB(255, 254, 255, 222),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 254, 255, 222),
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
         '/adminList': (context) => const FlowerList(),
         '/adminAdd': (context) => const FlowerEntry(),
+        StartConversation.routeName: (context) => const StartConversation(),
         '/adminEdit': (context) => const FlowerEntry(),
       },
     );
