@@ -1,20 +1,30 @@
 class ForumItem {
-  final String question;
-  final String description;
-  final String image;
+  late String? id;
+  late String? question;
+  late String? description;
+  late String? image;
 
-  const ForumItem({
-    required this.question,
-    required this.description,
-    required this.image,
+  ForumItem({
+    this.question,
+    this.description,
+    this.image,
   });
-}
 
-const List<ForumItem> items = [
-  ForumItem(
-    question: "Flower is not grown properly",
-    description: "description",
-    image:
-        "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=998&q=80",
-  )
-];
+  ForumItem.fromJson(Map<String, dynamic> json) {
+    id = json["_id"];
+    question = json["question"];
+    description = json["description"];
+    image = json["image"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+
+    _data["_id"] = id;
+    _data["question"] = question;
+    _data["description"] = description;
+    _data["image"] = image;
+
+    return _data;
+  }
+}
