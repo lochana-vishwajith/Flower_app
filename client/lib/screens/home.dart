@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/adminAdd');
+                Navigator.pushNamed(context, '/adminList');
               },
               icon: Icon(Icons.admin_panel_settings_outlined))
         ],

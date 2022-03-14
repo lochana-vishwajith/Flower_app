@@ -305,6 +305,8 @@ class _FlowerAddState extends State<FlowerAdd> {
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(10))),
+                                minLines: 2,
+                                maxLines: 10,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Description Can't be Empty";

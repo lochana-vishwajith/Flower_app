@@ -38,4 +38,25 @@ router.get("/", async(req,res)=>{
     });
 });
 
+router.get('/:id', async (req,res) => {
+    const id = req.params.id;
+
+    await Flower.findById({_id: id}).then(result => {
+        res.status(200).send(result);
+    }).catch(err =>{
+        res.status(500).send(err);
+    })
+})
+
+router.delete('/:id', async (req,res) => {
+    const id = req.params.id;
+
+    await Flower.findByIdAndRemove(id).then(result => {
+        res.status(200).send(result);
+    }).catch(err =>{
+        res.status(500).send(err);
+    })
+})
+
+
 module.exports = router;

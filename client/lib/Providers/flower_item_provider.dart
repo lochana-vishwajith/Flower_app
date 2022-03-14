@@ -15,6 +15,9 @@ class FlowerItemProvider extends ChangeNotifier {
   late String synonym;
   late String bloom;
   late String description;
+  late String imageURL;
+
+  List<FlowerModel> flowers = [];
 
   void postFlowerItem(BuildContext context) async {
     final response = await http.post(
@@ -37,11 +40,35 @@ class FlowerItemProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: 'Flower Added Succesfull',
       );
+      Navigator.pushNamed(context, '/adminList');
     } else {
       notifyListeners();
       Fluttertoast.showToast(
         msg: 'Problem with Adding Flower',
       );
+    }
+  }
+
+  Future<List<FlowerModel>> getAllFlowers() async {
+    flowers.clear();
+
+    final response = await http
+        .get(Uri.parse('https://ctse-flowerapp.herokuapp.com/flower'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+
+      final data = jsonDecode(response.body) as List;
+      print(data);
+      for (Map<String, dynamic> item in data) {
+        var flower = FlowerModel.fromJson(item);
+        flowers.add(flower);
+      }
+      return flowers;
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(msg: 'Error Loading Flower List');
+      return flowers;
     }
   }
 }

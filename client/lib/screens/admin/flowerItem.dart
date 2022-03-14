@@ -15,7 +15,7 @@ class FlowerItem extends StatelessWidget {
         child: Container(
           width: 200,
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 199, 248, 204),
+              color: Color.fromARGB(193, 216, 238, 164),
               borderRadius: BorderRadius.circular(10.0)),
           child: flowerWidget(context),
         ));
