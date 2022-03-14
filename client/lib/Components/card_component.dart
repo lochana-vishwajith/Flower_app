@@ -2,10 +2,21 @@ import 'package:client/models/forum_items.dart';
 import 'package:client/screens/forum/viewQuestion.dart';
 import 'package:flutter/material.dart';
 
-class CardComponent extends StatelessWidget {
+class CardComponent extends StatefulWidget {
   // final ForumItem item;
   final String title;
-  const CardComponent({Key? key, required this.title}) : super(key: key);
+
+  CardComponent({required this.title});
+
+  @override
+  // ignore: no_logic_in_create_state
+  State<CardComponent> createState() => _CardComponentState(title: title);
+}
+
+class _CardComponentState extends State<CardComponent> {
+  final String title;
+
+  _CardComponentState({required this.title});
 
   @override
   Widget build(BuildContext context) {
