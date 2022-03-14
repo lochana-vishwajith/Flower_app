@@ -1,7 +1,8 @@
 import 'dart:developer';
+import 'package:client/Providers/forum_Item_provider..dart';
 import 'package:client/models/forum_items.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class StartConversation extends StatefulWidget {
   static const String routeName = '/start_conversation';
@@ -14,17 +15,29 @@ class StartConversation extends StatefulWidget {
 
 class _StartConversationState extends State<StartConversation> {
   final formKey = GlobalKey<FormState>();
-  var url = Uri.parse('http://localhost:5000/forum');
-  ForumItem? forumItems;
+
+  var question = '';
+  var description = '';
+
+  final questionController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    questionController.dispose();
+    descriptionController.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
-    forumItems = ForumItem();
   }
 
   @override
   Widget build(BuildContext context) {
+    final forumProvider = context.read<ForumItemProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Start Conversation"),
@@ -47,7 +60,9 @@ class _StartConversationState extends State<StartConversation> {
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: TextFormField(
-                            onChanged: (value) => forumItems?.question = value,
+                            controller: questionController,
+                            onChanged: (value) =>
+                                {forumProvider.question = value},
                             decoration: InputDecoration(
                                 labelText: "Your Question",
                                 border: OutlineInputBorder(
@@ -64,8 +79,9 @@ class _StartConversationState extends State<StartConversation> {
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: TextFormField(
+                            controller: descriptionController,
                             onChanged: (value) =>
-                                forumItems?.description = value,
+                                {forumProvider.description = value},
                             decoration: InputDecoration(
                                 labelText: "Description",
                                 border: OutlineInputBorder(
@@ -89,17 +105,8 @@ class _StartConversationState extends State<StartConversation> {
                               onPressed: () async {
                                 final isValid =
                                     formKey.currentState?.validate();
-                                log('is valid $forumItems');
                                 if (isValid == true) {
-                                  final response =
-                                      await http.post(url, body: forumItems);
-
-                                  if (response.statusCode == 200) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text("Question Posted to Forum"),
-                                    ));
-                                  }
+                                  forumProvider.postForumItem(context);
                                 }
                               },
                               icon: const Icon(Icons.post_add),
