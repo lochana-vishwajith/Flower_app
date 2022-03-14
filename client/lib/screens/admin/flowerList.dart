@@ -73,7 +73,7 @@ class _FlowerListState extends State<FlowerList> {
 
   Widget loadFlowers() {
     return FutureBuilder(
-        future: Service.getFlowers(),
+        // future: Service.getFlowers(),
         builder: (
           BuildContext context,
           AsyncSnapshot<List<FlowerModel>?> model,
