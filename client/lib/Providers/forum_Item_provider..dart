@@ -12,6 +12,8 @@ class ForumItemProvider extends ChangeNotifier {
   late String question;
   late String description;
 
+  List<ForumItem> posts = [];
+
   void setForumId(String id) {
     this.id = id;
   }
@@ -58,6 +60,33 @@ class ForumItemProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: 'Problem with Posting Question',
       );
+    }
+  }
+
+  Future<List<ForumItem>> getAllForumPosts() async {
+    posts.clear();
+
+    final response =
+        await http.get(Uri.parse('https://ctse-flowerapp.herokuapp.com/forum'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+
+      final data = jsonDecode(response.body) as List;
+      print("response $data");
+
+      for (Map<String, dynamic> item in data) {
+        var post = ForumItem.fromJson(item);
+        posts.add(post);
+      }
+      return posts;
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Problem with Getting Posts',
+      );
+
+      return posts;
     }
   }
 }
