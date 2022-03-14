@@ -38,7 +38,8 @@ class ForumItemProvider extends ChangeNotifier {
 
   void postForumItem(BuildContext context) async {
     print('question $question description $description');
-    final response = await http.post(Uri.parse('http://localhost:5000/forum'),
+    final response = await http.post(
+        Uri.parse('https://ctse-flowerapp.herokuapp.com/forum'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
