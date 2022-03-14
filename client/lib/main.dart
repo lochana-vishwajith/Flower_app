@@ -1,4 +1,6 @@
+import 'package:client/Providers/flower_item_provider.dart';
 import 'package:client/Providers/forum_Item_provider..dart';
+import 'package:client/screens/admin/flowerAdd.dart';
 import 'package:client/screens/admin/flowerEntry.dart';
 import 'package:client/screens/forum/start_conversation.dart';
 import 'package:client/screens/admin/flowerList.dart';
@@ -7,9 +9,10 @@ import 'package:client/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => ForumItemProvider())],
-    child: MyApp()));
+void main() => runApp(MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => ForumItemProvider()),
+      ChangeNotifierProvider(create: (_) => FlowerItemProvider())
+    ], child: MyApp()));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -26,9 +29,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/adminList': (context) => const FlowerList(),
-        '/adminAdd': (context) => const FlowerEntry(),
+        '/adminAdd': (context) => const FlowerAdd(),
         StartConversation.routeName: (context) => const StartConversation(),
-        '/adminEdit': (context) => const FlowerEntry(),
+        '/adminEdit': (context) => const FlowerAdd(),
         ViewQuestions.routeName: ((context) => const ViewQuestions()),
       },
     );
