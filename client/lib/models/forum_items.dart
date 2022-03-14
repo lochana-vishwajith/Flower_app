@@ -1,30 +1,28 @@
+import 'dart:convert';
+
+ForumItem forumFromJson(String str) => ForumItem.fromJson(json.decode(str));
+
+String forumToJson(ForumItem data) => json.encode(data.toJson());
+
 class ForumItem {
-  late String? id;
-  late String? question;
-  late String? description;
-  late String? image;
+  String id;
+  String question;
+  String description;
 
   ForumItem({
-    this.question,
-    this.description,
-    this.image,
+    required this.id,
+    required this.question,
+    required this.description,
   });
 
-  ForumItem.fromJson(Map<String, dynamic> json) {
-    id = json["_id"];
-    question = json["question"];
-    description = json["description"];
-    image = json["image"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-
-    _data["_id"] = id;
-    _data["question"] = question;
-    _data["description"] = description;
-    _data["image"] = image;
-
-    return _data;
-  }
+  factory ForumItem.fromJson(Map<String, dynamic> json) => ForumItem(
+        id: json["_id"],
+        question: json["question"],
+        description: json["description"],
+      );
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "_question": question,
+        "_description": description,
+      };
 }

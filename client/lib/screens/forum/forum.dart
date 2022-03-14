@@ -16,6 +16,7 @@ class Forum extends StatelessWidget {
           ),
           CardComponent(
             title: "My Flower Problems",
+            
           ),
         ]),
       ),
