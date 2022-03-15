@@ -31,7 +31,7 @@ router.get('/:id', async (req,res) => {
 
     console.log("forum get by id");
 
-    await Forum.findById({userId: id}).then(result => {
+    await Forum.findById({_id:id}).then(result => {
         res.status(200).send(result);
     }).catch(err =>{
         res.status(500).send(err);
