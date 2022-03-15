@@ -50,4 +50,15 @@ router.delete('/:id', async (req,res) => {
     })
 })
 
+router.get('/userId/:id',async (req,res) => {
+    const userId = req.params.id;
+
+    await Forum.find({userId: userId}).then(result => {
+
+        res.status(200).send(result);
+    }).catch(err => {
+        res.status(200).send(err);
+    })
+})
+
 module.exports = router;
