@@ -135,15 +135,15 @@ class _FlowerAddState extends State<FlowerAdd> {
   Widget build(BuildContext context) {
     final flowerProvider = context.read<FlowerItemProvider>();
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Flower Entry'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        // appBar: AppBar(
+        //   title: const Text('Flower Entry'),
+        //   leading: IconButton(
+        //     icon: const Icon(Icons.arrow_back_rounded),
+        //     onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //   ),
+        // ),
         body: Form(
             key: formKey,
             child: SafeArea(

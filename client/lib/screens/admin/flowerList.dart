@@ -32,7 +32,9 @@ class _FlowerListState extends State<FlowerList> {
             itemBuilder: (context, index) {
               return FlowerItem(
                 model: flowers[index],
-                onDelete: (FlowerModel model) {},
+                onDelete: (FlowerModel model) {
+                  // FlowerItemProvider().deleteFlower(model.id);
+                },
                 user: 'admin',
               );
             },
@@ -62,16 +64,16 @@ class _FlowerListState extends State<FlowerList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Flowers List"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/adminAdd');
-              },
-              icon: Icon(Icons.add))
-        ],
-      ),
+      // appBar: AppBar(
+      // title: const Text("Flowers List"),
+      // actions: [
+      //   IconButton(
+      //       onPressed: () {
+      //         Navigator.pushNamed(context, '/adminAdd');
+      //       },
+      //       icon: Icon(Icons.add))
+      // ],
+      // ),
       body: loadFlowers(),
     );
   }

@@ -2,6 +2,8 @@ import 'package:client/models/flower_model.dart';
 import 'package:client/screens/search/flowerView.dart';
 import 'package:flutter/material.dart';
 
+import '../../Providers/flower_item_provider.dart';
+
 class FlowerItem extends StatelessWidget {
   // const FlowerItem({Key? key, this.model, this.onDelete,required this.user}) : super(key: key);
   FlowerItem({Key? key, this.model, this.onDelete, required this.user})
@@ -81,7 +83,9 @@ class FlowerItem extends StatelessWidget {
                       GestureDetector(
                         child: const Icon(Icons.delete_forever_outlined),
                         onTap: () {
-                          onDelete!(model);
+                          // print(onDelete!(model.id));
+                          print(model!.id!);
+                          FlowerItemProvider().deleteFlower(model!.id!);
                         },
                       ),
                     ],

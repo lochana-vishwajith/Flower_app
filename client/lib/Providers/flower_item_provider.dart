@@ -59,7 +59,6 @@ class FlowerItemProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = jsonDecode(response.body) as List;
-      print(data);
       for (Map<String, dynamic> item in data) {
         var flower = FlowerModel.fromJson(item);
         flowers.add(flower);
@@ -69,6 +68,24 @@ class FlowerItemProvider extends ChangeNotifier {
       notifyListeners();
       Fluttertoast.showToast(msg: 'Error Loading Flower List');
       return flowers;
+    }
+  }
+
+  void deleteFlower(String id) async {
+    print('ID: $id');
+    final response = await http
+        .delete(Uri.parse('https://ctse-flowerapp.herokuapp.com/flower/$id'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Flower Deleted Succesfull',
+      );
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Error',
+      );
     }
   }
 }
