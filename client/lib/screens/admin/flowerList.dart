@@ -33,6 +33,7 @@ class _FlowerListState extends State<FlowerList> {
               return FlowerItem(
                 model: flowers[index],
                 onDelete: (FlowerModel model) {},
+                user: 'admin',
               );
             },
           )
