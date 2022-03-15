@@ -6,6 +6,7 @@ import 'package:client/screens/forum/start_conversation.dart';
 import 'package:client/screens/admin/flowerList.dart';
 import 'package:client/screens/forum/viewQuestion.dart';
 import 'package:client/screens/home.dart';
+import 'package:client/screens/search/flowerView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         StartConversation.routeName: (context) => const StartConversation(),
         '/adminEdit': (context) => const FlowerAdd(),
         ViewQuestions.routeName: ((context) => const ViewQuestions()),
+        FlowerView.routeName: ((context) => const FlowerView()),
       },
     );
   }
