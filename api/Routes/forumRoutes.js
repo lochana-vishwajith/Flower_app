@@ -31,7 +31,7 @@ router.get('/:id', async (req,res) => {
 
     console.log("forum get by id");
 
-    await Forum.findById({userId: id}).then(result => {
+    await Forum.findById({_id:id}).then(result => {
         res.status(200).send(result);
     }).catch(err =>{
         res.status(500).send(err);
@@ -47,6 +47,17 @@ router.delete('/:id', async (req,res) => {
         res.status(200).send(result);
     }).catch(err =>{
         res.status(500).send(err);
+    })
+})
+
+router.get('/userId/:id',async (req,res) => {
+    const userId = req.params.id;
+
+    await Forum.find({userId: userId}).then(result => {
+
+        res.status(200).send(result);
+    }).catch(err => {
+        res.status(200).send(err);
     })
 })
 
