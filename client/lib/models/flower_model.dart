@@ -84,7 +84,7 @@ class FlowerModel {
   });
 
   factory FlowerModel.fromJson(Map<String, dynamic> json) => FlowerModel(
-      id: json["id"],
+      id: json["_id"],
       family: json["family"],
       tribe: json["tribe"],
       kingdom: json["kingdom"],

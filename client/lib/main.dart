@@ -1,5 +1,6 @@
 import 'package:client/Providers/flower_item_provider.dart';
 import 'package:client/Providers/forum_Item_provider..dart';
+import 'package:client/screens/admin/admin_home.dart';
 import 'package:client/screens/admin/flowerAdd.dart';
 import 'package:client/screens/admin/flowerEntry.dart';
 import 'package:client/screens/forum/my_posts.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         ViewQuestions.routeName: ((context) => const ViewQuestions()),
         MyPosts.routeName: ((context) => const MyPosts()),
         FlowerView.routeName: ((context) => const FlowerView()),
+        '/adminHome': (context) => const AdminHome(),
       },
     );
   }
