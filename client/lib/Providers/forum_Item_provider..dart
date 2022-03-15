@@ -63,11 +63,55 @@ class ForumItemProvider extends ChangeNotifier {
     }
   }
 
+  void deletePost(String id) async {
+    final response = await http
+        .delete(Uri.parse('https://ctse-flowerapp.herokuapp.com/forum/$id'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Post Deleted',
+      );
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Problem with Deleting Posts',
+      );
+    }
+  }
+
   Future<List<ForumItem>> getAllForumPosts() async {
     posts.clear();
 
     final response =
         await http.get(Uri.parse('https://ctse-flowerapp.herokuapp.com/forum'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+
+      final data = jsonDecode(response.body) as List;
+      print("response $data");
+
+      for (Map<String, dynamic> item in data) {
+        var post = ForumItem.fromJson(item);
+        posts.add(post);
+      }
+      return posts;
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Problem with Getting Posts',
+      );
+
+      return posts;
+    }
+  }
+
+  Future<List<ForumItem>> getUserForumPosts(String id) async {
+    posts.clear();
+
+    final response = await http.get(
+        Uri.parse('https://ctse-flowerapp.herokuapp.com/forum/userId/$id'));
 
     if (response.statusCode == 200) {
       notifyListeners();

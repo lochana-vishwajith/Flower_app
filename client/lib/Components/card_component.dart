@@ -1,27 +1,19 @@
 import 'package:client/models/forum_items.dart';
-import 'package:client/screens/forum/viewQuestion.dart';
 import 'package:flutter/material.dart';
 
-class CardComponent extends StatefulWidget {
-  // final ForumItem item;
-  final String title;
+import '../screens/forum/viewQuestion.dart';
 
-  CardComponent({required this.title});
+class CardComponent extends StatelessWidget {
+  const CardComponent({Key? key, this.model}) : super(key: key);
 
-  @override
-  // ignore: no_logic_in_create_state
-  State<CardComponent> createState() => _CardComponentState(title: title);
-}
-
-class _CardComponentState extends State<CardComponent> {
-  final String title;
-
-  _CardComponentState({required this.title});
-
+  final ForumItem? model;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(ViewQuestions.routeName),
+      onTap: () => {
+        print("id ${model!.id}"),
+        Navigator.of(context).pushNamed(ViewQuestions.routeName)
+      },
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
@@ -30,7 +22,7 @@ class _CardComponentState extends State<CardComponent> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: Text(title),
+              title: Text(model!.question),
             )
           ],
         ),
