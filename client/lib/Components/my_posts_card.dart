@@ -1,4 +1,5 @@
 import 'package:client/Providers/forum_Item_provider..dart';
+import 'package:client/screens/forum/update_forum-question.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,10 @@ class MyPostCardComponent extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                           child: GestureDetector(
                             child: const Icon(Icons.edit),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(UpdateForum.routeName);
+                            },
                           ),
                         ),
                         Align(

@@ -133,4 +133,28 @@ class ForumItemProvider extends ChangeNotifier {
       return posts;
     }
   }
+
+  void updateForumPosts(String id, BuildContext context) async {
+    final response = await http.put(
+        Uri.parse('https://ctse-flowerapp.herokuapp.com/forum/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{
+          'question': question,
+          'description': description,
+        }));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Question Updated',
+      );
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Problem with Updating Question',
+      );
+    }
+  }
 }

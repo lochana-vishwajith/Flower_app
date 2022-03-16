@@ -24,7 +24,7 @@ router.get('/', async (req,res) => {
     }).catch(err =>{
         res.status(500).send(err);
     })
-})
+});
 
 router.get('/:id', async (req,res) => {
     const id = req.params.id;
@@ -36,7 +36,7 @@ router.get('/:id', async (req,res) => {
     }).catch(err =>{
         res.status(500).send(err);
     })
-})
+});
 
 router.delete('/:id', async (req,res) => {
     const id = req.params.id;
@@ -48,7 +48,7 @@ router.delete('/:id', async (req,res) => {
     }).catch(err =>{
         res.status(500).send(err);
     })
-})
+});
 
 router.get('/userId/:id',async (req,res) => {
     const userId = req.params.id;
@@ -57,8 +57,23 @@ router.get('/userId/:id',async (req,res) => {
 
         res.status(200).send(result);
     }).catch(err => {
-        res.status(200).send(err);
+        res.status(500).send(err);
     })
-})
+});
+
+router.put('/:id',(req,res) => {
+    const id = req.params.id;
+
+    await Forum.update({_id: id},{
+        $set: {
+            question: req.body.question,
+            description: req.body.description
+        }
+    }).then(result => {
+        res.status(200).send(result);
+    }).catch(err => {
+        res.status(500).send(err);
+    })
+});
 
 module.exports = router;
