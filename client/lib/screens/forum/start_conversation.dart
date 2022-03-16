@@ -1,7 +1,9 @@
-import 'dart:developer';
+import 'dart:io';
+
 import 'package:client/Providers/forum_Item_provider..dart';
 import 'package:client/models/forum_items.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class StartConversation extends StatefulWidget {
@@ -18,7 +20,9 @@ class _StartConversationState extends State<StartConversation> {
 
   var question = '';
   var description = '';
-
+  bool isImageSelected = false;
+  var imageUrl = '';
+  ForumItem? forumItem;
   final questionController = TextEditingController();
   final descriptionController = TextEditingController();
 
@@ -32,6 +36,81 @@ class _StartConversationState extends State<StartConversation> {
   @override
   void initState() {
     super.initState();
+  }
+
+  static Widget flowerImagePicker(
+    bool isImageSelected,
+    String imageName,
+    Function onImagePicked,
+  ) {
+    Future<XFile?> _imageFie;
+    ImagePicker _imagePicker = ImagePicker();
+
+    return Column(
+      children: [
+        imageName.isNotEmpty
+            ? isImageSelected
+                ? Image.file(
+                    File(imageName),
+                    height: 100,
+                    width: 100,
+                  )
+                : SizedBox(
+                    child: Image.network(
+                      imageName,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.scaleDown,
+                    ),
+                  )
+            : SizedBox(
+                child: Image.network(
+                  "https://www.babypillowth.com/images/templates/upload.png",
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30.0,
+              width: 30.0,
+              child: IconButton(
+                  padding: const EdgeInsets.all(0),
+                  icon: const Icon(
+                    Icons.image,
+                    size: 30.0,
+                  ),
+                  onPressed: () {
+                    _imageFie =
+                        _imagePicker.pickImage(source: ImageSource.gallery);
+                    _imageFie.then((file) async {
+                      onImagePicked(file);
+                    });
+                  }),
+            ),
+            SizedBox(
+                height: 30.0,
+                width: 30.0,
+                child: IconButton(
+                    padding: const EdgeInsets.all(0),
+                    icon: const Icon(
+                      Icons.camera,
+                      size: 30.0,
+                    ),
+                    onPressed: () {
+                      _imageFie =
+                          _imagePicker.pickImage(source: ImageSource.camera);
+                      _imageFie.then((file) async {
+                        onImagePicked(file);
+                      });
+                    }))
+          ],
+        )
+      ],
+    );
   }
 
   @override
@@ -57,6 +136,13 @@ class _StartConversationState extends State<StartConversation> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        flowerImagePicker(
+                            isImageSelected, forumItem?.imageUrl ?? "", (file) {
+                          setState(() {
+                            forumItem?.imageUrl = file.path;
+                            isImageSelected = true;
+                          });
+                        }),
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: TextFormField(

@@ -27,6 +27,14 @@ class MyPostCardComponent extends StatelessWidget {
                 ListTile(
                   title: Text(model!.question),
                 ),
+                ListBody(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Text(model!.description),
+                    )
+                  ],
+                ),
                 Align(
                     alignment: Alignment.bottomLeft,
                     child: Row(
