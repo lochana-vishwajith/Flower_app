@@ -61,7 +61,7 @@ router.get('/userId/:id',async (req,res) => {
     })
 });
 
-router.put('/:id',(req,res) => {
+router.put('/:id',async (req,res) => {
     const id = req.params.id;
 
     await Forum.update({_id: id},{
