@@ -11,6 +11,7 @@ class ForumItemProvider extends ChangeNotifier {
   late String id;
   late String question;
   late String description;
+  late String imageUrl;
 
   List<ForumItem> posts = [];
 
@@ -108,6 +109,33 @@ class ForumItemProvider extends ChangeNotifier {
   }
 
   Future<List<ForumItem>> getUserForumPosts(String id) async {
+    posts.clear();
+
+    final response = await http.get(
+        Uri.parse('https://ctse-flowerapp.herokuapp.com/forum/userId/$id'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+
+      final data = jsonDecode(response.body) as List;
+      print("response $data");
+
+      for (Map<String, dynamic> item in data) {
+        var post = ForumItem.fromJson(item);
+        posts.add(post);
+      }
+      return posts;
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Problem with Getting Posts',
+      );
+
+      return posts;
+    }
+  }
+
+  Future<List<ForumItem>> getUserForumPostsReplies(String id) async {
     posts.clear();
 
     final response = await http.get(

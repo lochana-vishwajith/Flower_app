@@ -8,6 +8,7 @@ class ForumItem {
   String id;
   String question;
   String description;
+  late String? imageUrl;
 
   ForumItem({
     required this.id,

@@ -12,7 +12,11 @@ class CardComponent extends StatelessWidget {
     return GestureDetector(
       onTap: () => {
         print("id ${model!.id}"),
-        Navigator.of(context).pushNamed(ViewQuestions.routeName)
+        Navigator.of(context).pushNamed(ViewQuestions.routeName,
+            arguments: ForumItem(
+                id: model!.id,
+                question: model!.question,
+                description: model!.description))
       },
       child: Card(
         shape:
