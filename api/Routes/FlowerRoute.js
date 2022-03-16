@@ -58,5 +58,26 @@ router.delete('/:id', async (req,res) => {
     })
 })
 
+router.put('/:id',async (req,res) => {
+    const id = req.params.id;
+
+    await Flower.updateOne({_id: id},{
+        $set: {
+            kingdom:req.body.kingdom,
+            family:req.body.family,
+            genus:req.body.genus,
+            tribe:req.body.tribe,
+            bloom:req.body.bloom,
+            description:req.body.description,
+            imageURL:req.body.imageURL,
+        }
+    }).then(result => {
+        res.status(200).send(result);
+    }).catch(err => {
+        res.status(500).send(err);
+    })
+});
+
+
 
 module.exports = router;
