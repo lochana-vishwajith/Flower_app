@@ -41,6 +41,8 @@ class _UpdateForumState extends State<UpdateForum> {
     final String? questionVal = args?.question;
     final String? descriptionVal = args?.description;
 
+    questionController.text = args!.question;
+    descriptionController.text = args.description;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Update Post"),
@@ -109,7 +111,23 @@ class _UpdateForumState extends State<UpdateForum> {
                                 final isValid =
                                     formKey.currentState?.validate();
                                 if (isValid == true) {
-                                  forumProvider.postForumItem(context);
+                                  print("question $question");
+                                  print(
+                                      "controller question ${questionController.text}");
+                                  var updatedQuestion = questionController.text;
+                                  var updatedDes = descriptionController.text;
+
+                                  if (question == questionController.text) {
+                                    updatedQuestion = question;
+                                  }
+
+                                  if (description ==
+                                      descriptionController.text) {
+                                    updatedDes = description;
+                                  }
+
+                                  forumProvider.updateForumPosts(
+                                      args.id, updatedQuestion, updatedDes);
                                 }
                               },
                               icon: const Icon(Icons.post_add),

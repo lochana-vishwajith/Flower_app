@@ -134,7 +134,7 @@ class ForumItemProvider extends ChangeNotifier {
     }
   }
 
-  void updateForumPosts(String id, BuildContext context) async {
+  void updateForumPosts(String id, String question, String description) async {
     final response = await http.put(
         Uri.parse('https://ctse-flowerapp.herokuapp.com/forum/$id'),
         headers: <String, String>{
