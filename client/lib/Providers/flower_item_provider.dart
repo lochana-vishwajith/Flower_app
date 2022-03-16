@@ -88,4 +88,34 @@ class FlowerItemProvider extends ChangeNotifier {
       );
     }
   }
+
+  void updateFlower(String id, BuildContext context) async {
+    final response = await http.put(
+        Uri.parse('https://ctse-flowerapp.herokuapp.com/flower/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{
+          'family': family,
+          'tribe': tribe,
+          'kingdom': kingdom,
+          'genus': genus,
+          'synonym': synonym,
+          'bloom': bloom,
+          'description': description,
+          'imageURL': imageURL,
+        }));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Question Updated',
+      );
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Problem with Updating Question',
+      );
+    }
+  }
 }
