@@ -39,7 +39,12 @@ class MyPostCardComponent extends StatelessWidget {
                             child: const Icon(Icons.edit),
                             onTap: () {
                               Navigator.of(context)
-                                  .pushNamed(UpdateForum.routeName);
+                                  .pushNamed(UpdateForum.routeName,
+                                      arguments: ForumItem(
+                                        id: model!.id,
+                                        question: model!.question,
+                                        description: model!.description,
+                                      ));
                             },
                           ),
                         ),
