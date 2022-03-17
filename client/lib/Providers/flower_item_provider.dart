@@ -12,10 +12,10 @@ class FlowerItemProvider extends ChangeNotifier {
   late String tribe;
   late String kingdom;
   late String genus;
-  late String synonym;
+  // late String synonym;
   late String bloom;
   late String description;
-  late String imageURL;
+  // late String imageURL;
 
   List<FlowerModel> flowers = [];
 
@@ -30,7 +30,7 @@ class FlowerItemProvider extends ChangeNotifier {
           'tribe': tribe,
           'kingdom': kingdom,
           'genus': genus,
-          'synonym': synonym,
+          // 'synonym': synonym,
           'bloom': bloom,
           'description': description,
         }));
@@ -100,10 +100,10 @@ class FlowerItemProvider extends ChangeNotifier {
           'tribe': tribe,
           'kingdom': kingdom,
           'genus': genus,
-          'synonym': synonym,
+          // 'synonym': synonym,
           'bloom': bloom,
           'description': description,
-          'imageURL': imageURL,
+          // 'imageURL': imageURL,
         }));
 
     if (response.statusCode == 200) {
@@ -111,6 +111,7 @@ class FlowerItemProvider extends ChangeNotifier {
       Fluttertoast.showToast(
         msg: 'Question Updated',
       );
+      Navigator.pushNamed(context, '/adminList');
     } else {
       notifyListeners();
       Fluttertoast.showToast(

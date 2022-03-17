@@ -98,22 +98,22 @@ Widget FlowerDetails(context) {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              const Text(
-                'Synonyms: ',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              Text(
-                '${args.synonym}',
-                style: const TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(10.0),
+        //   child: Column(
+        //     children: [
+        //       const Text(
+        //         'Synonyms: ',
+        //         style: TextStyle(fontSize: 20.0),
+        //       ),
+        //       Text(
+        //         '${args.synonym}',
+        //         style: const TextStyle(
+        //             fontSize: 20.0, fontWeight: FontWeight.bold),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(

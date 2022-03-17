@@ -66,7 +66,7 @@ class FlowerModel {
   late String? tribe;
   late String? kingdom;
   late String? genus;
-  late String? synonym;
+  // late String? synonym;
   late String? bloom;
   late String? description;
   late String? imageUrl;
@@ -77,7 +77,7 @@ class FlowerModel {
     required this.tribe,
     required this.kingdom,
     required this.genus,
-    required this.synonym,
+    // required this.synonym,
     required this.bloom,
     required this.description,
     this.imageUrl,
@@ -89,7 +89,7 @@ class FlowerModel {
       tribe: json["tribe"],
       kingdom: json["kingdom"],
       genus: json["genus"],
-      synonym: json["synonym"],
+      // synonym: json["synonym"],
       bloom: json["bloom"],
       description: json["description"],
       imageUrl: json["imageUrl"]);
@@ -100,7 +100,7 @@ class FlowerModel {
         "_tribe": tribe,
         "_kingdom": kingdom,
         "_genus": genus,
-        "_synonym": synonym,
+        // "_synonym": synonym,
         "_bloom": bloom,
         "_description": description,
         "_imageUrl": imageUrl,

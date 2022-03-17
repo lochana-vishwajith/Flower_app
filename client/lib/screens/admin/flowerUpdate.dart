@@ -7,16 +7,16 @@ import 'package:provider/provider.dart';
 
 import '../../models/flower_model.dart';
 
-class FlowerAdd extends StatefulWidget {
-  static const String routeName = '/flower_add';
+class FlowerUpdate extends StatefulWidget {
+  static const String routeName = '/flower_update';
 
-  const FlowerAdd({Key? key}) : super(key: key);
+  const FlowerUpdate({Key? key}) : super(key: key);
 
   @override
-  State<FlowerAdd> createState() => _FlowerAddState();
+  State<FlowerUpdate> createState() => _FlowerUpdateState();
 }
 
-class _FlowerAddState extends State<FlowerAdd> {
+class _FlowerUpdateState extends State<FlowerUpdate> {
   final formKey = GlobalKey<FormState>();
 
   bool isImageSelected = false;
@@ -54,6 +54,25 @@ class _FlowerAddState extends State<FlowerAdd> {
   @override
   void initState() {
     super.initState();
+
+    flowerModel = FlowerModel(
+        bloom: '',
+        description: '',
+        family: '',
+        genus: '',
+        id: '',
+        kingdom: '',
+        // synonym: '',
+        tribe: '');
+
+    Future.delayed(Duration.zero, (() {
+      if (ModalRoute.of(context)?.settings.arguments != null) {
+        final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
+
+        flowerModel = arguments['model'];
+        setState(() {});
+      }
+    }));
   }
 
   static Widget flowerImagePicker(
@@ -134,16 +153,27 @@ class _FlowerAddState extends State<FlowerAdd> {
   @override
   Widget build(BuildContext context) {
     final flowerProvider = context.read<FlowerItemProvider>();
+    // final FlowerModel? args =
+    //     ModalRoute.of(context)!.settings.arguments as FlowerModel;
+
+    kingdomController.text = flowerModel!.kingdom!;
+    familyController.text = flowerModel!.family!;
+    tribeController.text = flowerModel!.tribe!;
+    genusController.text = flowerModel!.genus!;
+    bloomController.text = flowerModel!.bloom!;
+    // synonymController.text = flowerModel!.synonym!;
+    descriptionController.text = flowerModel!.description!;
+
     return Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Flower Entry'),
-        //   leading: IconButton(
-        //     icon: const Icon(Icons.arrow_back_rounded),
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),
-        // ),
+        appBar: AppBar(
+          title: const Text('Flower Update'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         body: Form(
             key: formKey,
             child: SafeArea(
@@ -323,11 +353,12 @@ class _FlowerAddState extends State<FlowerAdd> {
                                     final isValid =
                                         formKey.currentState?.validate();
                                     if (isValid == true) {
-                                      flowerProvider.postFlowerItem(context);
+                                      flowerProvider.updateFlower(
+                                          flowerModel!.id!, context);
                                     }
                                   },
                                   icon: const Icon(Icons.add_box),
-                                  label: const Text("Add Flower"),
+                                  label: const Text("Update Flower"),
                                   style: ElevatedButton.styleFrom(
                                     primary: const Color.fromARGB(
                                         255, 121, 180, 112),
