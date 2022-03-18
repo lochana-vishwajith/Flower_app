@@ -92,7 +92,7 @@ class FlowerModel {
       // synonym: json["synonym"],
       bloom: json["bloom"],
       description: json["description"],
-      imageUrl: json["imageUrl"]);
+      imageUrl: json["imageURL"]);
 
   Map<String, dynamic> toJson() => {
         "_id": id,
@@ -103,6 +103,6 @@ class FlowerModel {
         // "_synonym": synonym,
         "_bloom": bloom,
         "_description": description,
-        "_imageUrl": imageUrl,
+        "_imageURL": imageUrl,
       };
 }

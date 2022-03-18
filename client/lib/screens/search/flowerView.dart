@@ -26,7 +26,7 @@ Widget FlowerDetails(context) {
               child: Image.network(
                 (args!.imageUrl == null || args.imageUrl == "")
                     ? "https://www.babypillowth.com/images/templates/upload.png"
-                    : args.imageUrl!,
+                    : args.imageUrl!.toString(),
                 height: 150,
                 width: 150,
                 fit: BoxFit.scaleDown,

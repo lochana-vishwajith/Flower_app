@@ -21,6 +21,7 @@ class _FlowerAddState extends State<FlowerAdd> {
 
   bool isImageSelected = false;
   FlowerModel? flowerModel;
+  // XFile? pickedFile;
 
   var family = '';
   var tribe = '';
@@ -56,7 +57,11 @@ class _FlowerAddState extends State<FlowerAdd> {
     super.initState();
   }
 
-  static Widget flowerImagePicker(
+  // void selectImage(ImageSource imageSource) async {
+  //   pickedFile = await ImagePicker().pickImage(source: imageSource);
+  // }
+
+  Widget flowerImagePicker(
     bool isImageSelected,
     String imageName,
     Function onImagePicked,
@@ -106,6 +111,7 @@ class _FlowerAddState extends State<FlowerAdd> {
                         _imagePicker.pickImage(source: ImageSource.gallery);
                     _imageFie.then((file) async {
                       onImagePicked(file);
+                      // selectImage(ImageSource.gallery);
                     });
                   }),
             ),
