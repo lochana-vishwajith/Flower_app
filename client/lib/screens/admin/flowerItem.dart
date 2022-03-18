@@ -39,8 +39,9 @@ class FlowerItem extends StatelessWidget {
           child: Image.network(
             (model!.imageUrl == null || model!.imageUrl == "")
                 ? "https://www.babypillowth.com/images/templates/upload.png"
-                : model!.imageUrl!,
-            height: 60,
+                : model!.imageUrl!.toString(),
+            width: 80,
+            height: 80,
             fit: BoxFit.scaleDown,
           ),
         ),
@@ -111,6 +112,7 @@ class FlowerItem extends StatelessWidget {
                                     genus: model!.genus,
                                     // synonym: model!.synonym,
                                     bloom: model!.bloom,
+                                    imageUrl: model!.imageUrl,
                                     description: model!.description));
                           },
                         ),
