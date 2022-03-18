@@ -76,7 +76,7 @@ class FlowerItem extends StatelessWidget {
                       GestureDetector(
                         child: const Icon(Icons.edit),
                         onTap: () {
-                          Navigator.of(context).pushNamed('/adminEdit',
+                          Navigator.of(context).pushNamed('/flower_update',
                               arguments: {'model': model});
                         },
                       ),
@@ -109,7 +109,7 @@ class FlowerItem extends StatelessWidget {
                                     tribe: model!.tribe,
                                     kingdom: model!.kingdom,
                                     genus: model!.genus,
-                                    synonym: model!.synonym,
+                                    // synonym: model!.synonym,
                                     bloom: model!.bloom,
                                     description: model!.description));
                           },

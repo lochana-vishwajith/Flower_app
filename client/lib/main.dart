@@ -3,6 +3,7 @@ import 'package:client/Providers/forum_Item_provider..dart';
 import 'package:client/screens/admin/admin_home.dart';
 import 'package:client/screens/admin/flowerAdd.dart';
 import 'package:client/screens/admin/flowerEntry.dart';
+import 'package:client/screens/admin/flowerUpdate.dart';
 import 'package:client/screens/forum/my_posts.dart';
 import 'package:client/screens/forum/start_conversation.dart';
 import 'package:client/screens/admin/flowerList.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         FlowerView.routeName: ((context) => const FlowerView()),
         '/adminHome': (context) => const AdminHome(),
         UpdateForum.routeName: ((context) => const UpdateForum()),
+        FlowerUpdate.routeName: ((context) => const FlowerUpdate()),
       },
     );
   }

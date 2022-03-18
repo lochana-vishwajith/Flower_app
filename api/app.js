@@ -21,15 +21,15 @@ const connection = mongoose.connection;
 
 //IT19152806
 
-auth.authenticateToken.unless = unless;
-app.use(
-  auth.authenticateToken.unless({
-    path: [
-      { url: "/users/login", methods: ["POST"] },
-      { url: "/users/register", methods: ["POST"] },
-    ],
-  })
-);
+// auth.authenticateToken.unless = unless;
+// app.use(
+//   auth.authenticateToken.unless({
+//     path: [
+//       { url: "/users/login", methods: ["POST"] },
+//       { url: "/users/register", methods: ["POST"] },
+//     ],
+//   })
+// );
 
 app.use(express.json());
 
