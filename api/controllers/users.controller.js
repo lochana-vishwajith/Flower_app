@@ -33,7 +33,17 @@ exports.login = (req, res, next) => {
 };
 
 exports.userProfile = (req, res, next) => {
-  return res.status(200).json({ message: "Authorized User!" });
+  //return res.status(200).json({ message: "Authorized User!" });
+  const id = req.params.id;
+  userService.viewUser(id, (error, result) => {
+    if (error) {
+      return next(error);
+    }
+    return res.status(200).send({
+      message: "User Profile Details",
+      data: result,
+    });
+  });
 };
 
 exports.delete = (req, res, next) => {
