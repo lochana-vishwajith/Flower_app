@@ -69,9 +69,20 @@ async function updateUser({ id, username, bio, mobile }, callback) {
   }
 }
 
+async function viewUser(id, callback) {
+  const user = await User.findById(id)
+    .then((response) => {
+      return callback(null, response);
+    })
+    .catch((error) => {
+      return callback(error);
+    });
+}
+
 module.exports = {
   login,
   register,
   deleteUser,
   updateUser,
+  viewUser,
 };
