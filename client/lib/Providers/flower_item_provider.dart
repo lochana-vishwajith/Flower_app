@@ -33,6 +33,7 @@ class FlowerItemProvider extends ChangeNotifier {
           // 'synonym': synonym,
           'bloom': bloom,
           'description': description,
+          // 'imageURL': imageURL,
         }));
 
     if (response.statusCode == 200) {

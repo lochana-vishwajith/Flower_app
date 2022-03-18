@@ -103,6 +103,6 @@ class FlowerModel {
         // "_synonym": synonym,
         "_bloom": bloom,
         "_description": description,
-        "_imageUrl": imageUrl,
+        "_imageURL": imageUrl,
       };
 }
