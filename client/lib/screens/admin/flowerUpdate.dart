@@ -353,8 +353,49 @@ class _FlowerUpdateState extends State<FlowerUpdate> {
                                     final isValid =
                                         formKey.currentState?.validate();
                                     if (isValid == true) {
+                                      var updatedKingdom =
+                                          kingdomController.text;
+                                      var updatedFamily = familyController.text;
+                                      var updatedTribe = tribeController.text;
+                                      var updatedGenus = genusController.text;
+                                      var updatedBloom = bloomController.text;
+                                      var updatedDescription =
+                                          descriptionController.text;
+
+                                      if (kingdom == kingdomController.text) {
+                                        updatedKingdom = kingdom;
+                                      }
+
+                                      if (family == familyController.text) {
+                                        updatedFamily = family;
+                                      }
+
+                                      if (tribe == tribeController.text) {
+                                        updatedTribe = tribe;
+                                      }
+
+                                      if (genus == genusController.text) {
+                                        updatedGenus = genus;
+                                      }
+
+                                      if (bloom == bloomController.text) {
+                                        updatedBloom = bloom;
+                                      }
+
+                                      if (description ==
+                                          descriptionController.text) {
+                                        updatedDescription = description;
+                                      }
+
                                       flowerProvider.updateFlower(
-                                          flowerModel!.id!, context);
+                                          flowerModel!.id!,
+                                          updatedFamily,
+                                          updatedTribe,
+                                          updatedKingdom,
+                                          updatedGenus,
+                                          updatedBloom,
+                                          updatedDescription,
+                                          context);
                                     }
                                   },
                                   icon: const Icon(Icons.add_box),

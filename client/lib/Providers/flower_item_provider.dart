@@ -89,7 +89,15 @@ class FlowerItemProvider extends ChangeNotifier {
     }
   }
 
-  void updateFlower(String id, BuildContext context) async {
+  void updateFlower(
+      String id,
+      String family,
+      String tribe,
+      String kingdom,
+      String genus,
+      String bloom,
+      String description,
+      BuildContext context) async {
     final response = await http.put(
         Uri.parse('https://ctse-flowerapp.herokuapp.com/flower/$id'),
         headers: <String, String>{
@@ -109,14 +117,41 @@ class FlowerItemProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       notifyListeners();
       Fluttertoast.showToast(
-        msg: 'Question Updated',
+        msg: 'Flower Updated',
       );
       Navigator.pushNamed(context, '/adminList');
     } else {
       notifyListeners();
       Fluttertoast.showToast(
-        msg: 'Problem with Updating Question',
+        msg: 'Problem with Updating Flower',
       );
+    }
+  }
+
+  Future<List<FlowerModel>> searchFlower(String query) async {
+    print(query);
+    final response = await http
+        .get(Uri.parse('https://ctse-flowerapp.herokuapp.com/flower'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+
+      final List data = jsonDecode(response.body);
+
+      return data.map((json) => FlowerModel.fromJson(json)).where((flower) {
+        final title = flower.genus?.toLowerCase();
+        final sub = flower.family?.toLowerCase();
+        final searchQuery = query.toLowerCase();
+
+        print(title);
+
+        return title!.contains(searchQuery) || sub!.contains(searchQuery);
+      }).toList();
+    } else {
+      notifyListeners();
+      throw Exception();
+      // Fluttertoast.showToast(msg: 'Error Loading Flower List');
+      // return flowers;
     }
   }
 }
