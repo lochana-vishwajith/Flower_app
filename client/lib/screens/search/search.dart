@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:client/Providers/flower_item_provider.dart';
@@ -16,8 +17,9 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   List<FlowerModel>? flowers = [];
-  var isLoaded = false;
+  // var isLoaded = false;
   String query = '';
+  Timer? debouncer;
 
   @override
   void initState() {
@@ -26,8 +28,25 @@ class _SearchState extends State<Search> {
     getFlowers();
   }
 
+  @override
+  void dispose() {
+    debouncer?.cancel();
+    super.dispose();
+  }
+
+  void debounce(
+    VoidCallback callback, {
+    Duration duration = const Duration(milliseconds: 1000),
+  }) {
+    if (debouncer != null) {
+      debouncer!.cancel();
+    }
+
+    debouncer = Timer(duration, callback);
+  }
+
   Future getFlowers() async {
-    final flowers = await FlowerItemProvider().getAllFlowers();
+    final flowers = await FlowerItemProvider().searchFlower(query);
 
     setState(() {
       this.flowers = flowers;
@@ -57,49 +76,60 @@ class _SearchState extends State<Search> {
     );
   }
 
-  Widget loadFlowers() {
-    return FutureBuilder(
-        future: FlowerItemProvider().getAllFlowers(),
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<List<FlowerModel>?> model,
-        ) {
-          if (model.hasData) {
-            return flowerList(model.data);
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-  }
+  // Widget loadFlowers() {
+  //   return FutureBuilder(
+  //       future: FlowerItemProvider().getAllFlowers(),
+  //       builder: (
+  //         BuildContext context,
+  //         AsyncSnapshot<List<FlowerModel>?> model,
+  //       ) {
+  //         if (model.hasData) {
+  //           return flowerList(model.data);
+  //         }
+  //         return const Center(
+  //           child: CircularProgressIndicator(),
+  //         );
+  //       });
+  // }
 
   Widget searchBar() =>
       SearchWidget(text: query, onChanged: searchFlower, hint: 'Search Flower');
 
-  void searchFlower(String query) {
-    final singleflower = flowers?.where((flower) {
-      final title = flower.genus?.toLowerCase();
-      final sub = flower.family?.toLowerCase();
-      final searchQuery = query.toLowerCase();
+  Future searchFlower(String query) async => debounce(() async {
+        final singleFlower = await FlowerItemProvider().searchFlower(query);
 
-      return title!.contains(searchQuery) || sub!.contains(searchQuery);
-    }).toList();
+        if (!mounted) return;
 
-    setState(() {
-      this.query = query;
-      this.flowers = flowers;
-    });
-  }
+        setState(() {
+          this.query = query;
+          this.flowers = singleFlower;
+        });
+      });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: null,
-        body: Column(
-          children: [
-            searchBar(),
-            loadFlowers(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              searchBar(),
+              // loadFlowers(),
+              flowerList(flowers),
+              // Expanded(
+              //     child: ListView.builder(
+              //         itemCount: flowers!.length,
+              //         itemBuilder: (context, index) {
+              //           final flower = flowers![index];
+              //           return buildFlower(flower);
+              //         }))
+            ],
+          ),
         ));
   }
+
+  // Widget buildFlower(FlowerModel flower) => ListTile(
+  //       title: Text(flower.genus!),
+  //       subtitle: Text(flower.family!),
+  //     );
 }
