@@ -1,3 +1,4 @@
+import 'package:client/screens/profile/update_profile.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
@@ -149,7 +150,12 @@ class _UserProfileState extends State<UserProfile> {
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(10)),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UpdateProfile()));
+                    },
                     child: Text(
                       'Edit Profile',
                       style: TextStyle(color: Colors.white, fontSize: 17),
