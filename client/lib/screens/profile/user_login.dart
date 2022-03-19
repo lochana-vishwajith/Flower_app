@@ -1,3 +1,4 @@
+import 'package:client/screens/profile/user_register.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -65,7 +66,12 @@ class _LoginPageState extends State<LoginPage> {
                       //color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserRegister()));
+                    },
                     child: Text(
                       'Sign Up',
                       style: TextStyle(color: Colors.green, fontSize: 15),
