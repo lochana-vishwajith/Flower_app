@@ -29,6 +29,12 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  myposts: [
+    { type: mongoose.Schema.Types.ObjectId, required: false, ref: "forums" },
+  ],
+  mydiaries: [
+    { type: mongoose.Schema.Types.ObjectId, required: false, ref: "diaries" },
+  ],
 });
 
 userSchema.set("toJSON", {
