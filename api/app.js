@@ -43,6 +43,9 @@ app.use("/forum", Forum);
 app.use("/users", require("./Routes/users.routes"));
 app.use(errors.errorHandler);
 
+const diary = require("./Routes/diaryRoutes");
+app.use("/diary", diary);
+
 connection.once("open", () => {
   console.log("Mongo DB connected");
 });
