@@ -11,10 +11,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Update Profile"),
-      //   backgroundColor: Colors.green,
-      // ),
+      appBar: AppBar(
+        title: Text("Update Profile"),
+        backgroundColor: Colors.lightGreen,
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 50.0, 30.0, 0.0),
         child: Column(

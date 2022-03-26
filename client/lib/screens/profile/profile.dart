@@ -1,6 +1,7 @@
 import 'package:client/screens/profile/update_profile.dart';
 import 'package:client/screens/profile/user_login.dart';
 import 'package:client/screens/profile/user_profile.dart';
+import 'package:client/screens/profile/user_profile_test.dart';
 import 'package:client/screens/profile/user_register.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,6 @@ class Profile extends StatelessWidget {
   // }
   @override
   Widget build(BuildContext context) {
-    return UserProfile();
+    return UserProfileTest();
   }
 }
