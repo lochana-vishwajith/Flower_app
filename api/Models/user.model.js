@@ -26,8 +26,9 @@ const userSchema = new mongoose.Schema({
     default: "No Bio",
   },
   mobile: {
-    type: Number,
+    type: String,
     required: false,
+    default: "No Number",
   },
   myposts: [
     { type: mongoose.Schema.Types.ObjectId, required: false, ref: "forums" },
