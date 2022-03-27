@@ -24,6 +24,7 @@ class _StartConversationState extends State<StartConversation> {
   var description = '';
   bool isImageSelected = false;
   var imageUrl = '';
+  var userId = ForumItemProvider.uid;
   ForumItem? forumItem;
   final questionController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -194,7 +195,7 @@ class _StartConversationState extends State<StartConversation> {
                                 final isValid =
                                     formKey.currentState?.validate();
                                 if (isValid == true) {
-                                  forumProvider.postForumItem(context);
+                                  forumProvider.postForumItem(context, userId);
                                 }
                               },
                               icon: const Icon(Icons.post_add),
