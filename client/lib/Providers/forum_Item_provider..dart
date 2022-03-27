@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:client/Providers/user_provider.dart';
 import 'package:client/models/forum_items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class ForumItemProvider extends ChangeNotifier {
   late String description;
   late String imageUrl;
   late String userId;
+  static String uid = '';
 
   List<ForumItem> posts = [];
 
@@ -39,6 +41,7 @@ class ForumItemProvider extends ChangeNotifier {
   void setuserId(String userId) {
     print('mage id $userId');
     this.userId = userId;
+    uid = userId;
   }
 
   void setForumDescription(String description) {
@@ -49,8 +52,8 @@ class ForumItemProvider extends ChangeNotifier {
     return this.description;
   }
 
-  void postForumItem(BuildContext context) async {
-    print('question $question description $description');
+  void postForumItem(BuildContext context, String uid) async {
+    print('question $question description $description id${uid}');
     final response = await http.post(
         Uri.parse('https://ctse-flowerapp.herokuapp.com/forum'),
         headers: <String, String>{
@@ -59,6 +62,7 @@ class ForumItemProvider extends ChangeNotifier {
         body: jsonEncode(<String, String>{
           'question': question,
           'description': description,
+          'userId': uid,
         }));
 
     if (response.statusCode == 200) {
@@ -67,6 +71,7 @@ class ForumItemProvider extends ChangeNotifier {
         msg: 'Question Posted to Forum',
       );
     } else {
+      print(response.body);
       notifyListeners();
       Fluttertoast.showToast(
         msg: 'Problem with Posting Question',
