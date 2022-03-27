@@ -12,6 +12,7 @@ class ForumItemProvider extends ChangeNotifier {
   late String question;
   late String description;
   late String imageUrl;
+  late String userId;
 
   List<ForumItem> posts = [];
 
@@ -29,6 +30,15 @@ class ForumItemProvider extends ChangeNotifier {
 
   String getForumQuestion() {
     return this.question;
+  }
+
+  String getuserId() {
+    return this.userId;
+  }
+
+  void setuserId(String userId) {
+    print('mage id $userId');
+    this.userId = userId;
   }
 
   void setForumDescription(String description) {

@@ -33,11 +33,12 @@ Widget forumList(posts) {
 }
 
 Widget loadPosts() {
-  const String userId = '1';
+  ForumItemProvider item = ForumItemProvider();
 
   return FutureBuilder(
       // future: Service.getFlowers(),
-      future: ForumItemProvider().getUserForumPosts(userId),
+      future: ForumItemProvider()
+          .getUserForumPosts(ForumItemProvider().getuserId()),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<ForumItem>?> model,

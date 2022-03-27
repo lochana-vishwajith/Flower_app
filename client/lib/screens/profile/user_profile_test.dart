@@ -6,6 +6,8 @@ import 'package:client/screens/profile/update_profile.dart';
 import 'package:client/screens/profile/user_login.dart';
 import 'package:flutter/material.dart';
 
+import '../forum/my_posts.dart';
+
 class UserProfileTest extends StatefulWidget {
   const UserProfileTest({Key? key}) : super(key: key);
 
@@ -165,7 +167,10 @@ class _UserProfileTestState extends State<UserProfileTest> {
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(10)),
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(MyPosts.routeName);
+                              },
                               child: Text(
                                 'My Posts',
                                 style: TextStyle(
