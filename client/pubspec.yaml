@@ -1,7 +1,7 @@
 name: client
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -24,6 +24,8 @@ dependencies:
   firebase_database_web: ^0.2.0+7
   fluttertoast: ^8.0.9
   provider: ^6.0.2
+  flutter_secure_storage: ^5.0.2
+  localstorage: ^4.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -32,4 +34,3 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 flutter:
   uses-material-design: true
-

@@ -23,8 +23,8 @@ class UserModel {
     email = json['email'];
     date = json['date'];
     bio = json['bio'];
-    myposts = List.castFrom<dynamic, dynamic>(json['myposts']);
-    mydiaries = List.castFrom<dynamic, dynamic>(json['mydiaries']);
+    // myposts = List.castFrom<dynamic, dynamic>(json['myposts']);
+    // mydiaries = List.castFrom<dynamic, dynamic>(json['mydiaries']);
     mobile = json['mobile'];
     id = json['id'];
   }
