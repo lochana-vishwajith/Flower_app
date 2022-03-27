@@ -16,6 +16,6 @@ class Profile extends StatelessWidget {
   // }
   @override
   Widget build(BuildContext context) {
-    return UserProfileTest();
+    return LoginPage();
   }
 }

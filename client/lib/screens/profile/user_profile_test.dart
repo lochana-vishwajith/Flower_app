@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:client/Providers/user_provider.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/screens/profile/update_profile.dart';
+import 'package:client/screens/profile/user_login.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileTest extends StatefulWidget {
@@ -13,6 +14,7 @@ class UserProfileTest extends StatefulWidget {
 }
 
 class _UserProfileTestState extends State<UserProfileTest> {
+  UserModel? _userModel;
   UserProvider provider = UserProvider();
   @override
   void initState() {
@@ -45,7 +47,19 @@ class _UserProfileTestState extends State<UserProfileTest> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Signout Successfully'),
+                                  duration: Duration(milliseconds: 1000),
+                                ),
+                              );
+                            },
                             icon: Icon(Icons.logout),
                             color: Colors.green,
                           )
@@ -215,7 +229,30 @@ class _UserProfileTestState extends State<UserProfileTest> {
                                 color: Colors.red,
                                 borderRadius: BorderRadius.circular(10)),
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                try {
+                                  await provider.deleteUser();
+                                  print("deletebutton onpress");
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('Deleted Successfully'),
+                                      duration: Duration(milliseconds: 1000),
+                                    ),
+                                  );
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()));
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(e.toString()),
+                                      duration: Duration(milliseconds: 1000),
+                                    ),
+                                  );
+                                }
+                              },
                               child: Text(
                                 'Delete Profile',
                                 style: TextStyle(
