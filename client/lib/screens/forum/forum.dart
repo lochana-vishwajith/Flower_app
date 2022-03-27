@@ -80,31 +80,31 @@ class _ForumState extends State<Forum> {
                     tooltip: 'Start Coversation',
                     child: const Icon(Icons.add)),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    height: 30,
-                    width: 100,
-                    child: FloatingActionButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(MyPosts.routeName);
-                        },
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        backgroundColor: const Color.fromARGB(255, 50, 59, 190),
-                        splashColor: const Color.fromARGB(255, 116, 114, 214),
-                        hoverColor: const Color.fromARGB(255, 6, 24, 58),
-                        foregroundColor:
-                            const Color.fromARGB(255, 255, 255, 255),
-                        elevation: 12,
-                        tooltip: 'My Posts',
-                        child: const Center(child: Text("My Posts"))),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 20),
+              //   child: Align(
+              //     alignment: Alignment.topRight,
+              //     child: Container(
+              //       height: 30,
+              //       width: 100,
+              //       child: FloatingActionButton(
+              //           onPressed: () {
+              //             Navigator.of(context).pushNamed(MyPosts.routeName);
+              //           },
+              //           shape: const RoundedRectangleBorder(
+              //               borderRadius:
+              //                   BorderRadius.all(Radius.circular(15))),
+              //           backgroundColor: const Color.fromARGB(255, 50, 59, 190),
+              //           splashColor: const Color.fromARGB(255, 116, 114, 214),
+              //           hoverColor: const Color.fromARGB(255, 6, 24, 58),
+              //           foregroundColor:
+              //               const Color.fromARGB(255, 255, 255, 255),
+              //           elevation: 12,
+              //           tooltip: 'My Posts',
+              //           child: const Center(child: Text("My Posts"))),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ));

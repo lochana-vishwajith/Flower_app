@@ -1,3 +1,4 @@
+import 'package:client/Providers/forum_Item_provider..dart';
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:client/models/user_model.dart';
@@ -10,6 +11,7 @@ class UserProvider extends ChangeNotifier {
   String data_url = "https://ctse-flowerapp.herokuapp.com";
   String local_data_url = "http://192.168.1.11:5000";
   final storage = new FlutterSecureStorage();
+  ForumItemProvider forum = ForumItemProvider();
 
   //get user
   @override
@@ -19,7 +21,7 @@ class UserProvider extends ChangeNotifier {
 
     try {
       var url = Uri.parse(
-          '${local_data_url}/users/user-profile/${await storage.read(key: "id")}');
+          '${data_url}/users/user-profile/${await storage.read(key: "id")}');
       var response = await http.get(url);
       print(response.statusCode);
 
@@ -121,6 +123,7 @@ class UserProvider extends ChangeNotifier {
             value: json.decode(response.body)['data']['id'].toString());
         String? val = await storage.read(key: "id");
         String? val1 = await storage.read(key: "token");
+        forum.setuserId(val as String);
         print("ID - ${val}");
         print("Token - ${val1}");
 

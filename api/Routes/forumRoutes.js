@@ -2,11 +2,11 @@ const router = require("express").Router();
 const Forum = require('../Models/forumModel');
 
 router.post('/', (req,res) => {
-    console.log("forum post");
-    const {question, description, image} = req.body;
+    console.log(`forum post,${req.body.userId}`);
+    const {question, description, image, userId} = req.body;
 
     const forumcontents = new Forum({
-        question, description, image
+        question, description, image,userId
     });
 
     forumcontents.save().then(result => {
