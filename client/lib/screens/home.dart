@@ -54,13 +54,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/adminHome');
-              },
-              icon: Icon(Icons.admin_panel_settings_outlined))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {
+        //         Navigator.pushNamed(context, '/adminHome');
+        //       },
+        //       icon: Icon(Icons.admin_panel_settings_outlined))
+        // ],
       ),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
