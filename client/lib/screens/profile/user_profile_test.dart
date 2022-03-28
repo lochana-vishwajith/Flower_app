@@ -70,7 +70,9 @@ class _UserProfileTestState extends State<UserProfileTest> {
                       Center(
                         child: CircleAvatar(
                           //backgroundImage: AssetImage('assets/pp.png'),
-                          backgroundColor: Colors.amber,
+                          //backgroundColor: Colors.amber,
+                          backgroundImage: NetworkImage(
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcZsL6PVn0SNiabAKz7js0QknS2ilJam19QQ&usqp=CAU"),
                           radius: 60.0,
                         ),
                       ),

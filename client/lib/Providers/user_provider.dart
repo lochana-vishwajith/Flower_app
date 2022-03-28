@@ -1,4 +1,5 @@
 import 'package:client/Providers/forum_Item_provider..dart';
+
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:client/models/user_model.dart';
@@ -142,7 +143,7 @@ class UserProvider extends ChangeNotifier {
 
   //delete user
   Future<UserModel> deleteUser() async {
-    var url = Uri.parse('http://192.168.1.11:5000/users/delete-user');
+    var url = Uri.parse('${data_url}/users/delete-user');
     //String Userid = await storage.read(key: "id").toString();
 
     try {
@@ -174,7 +175,7 @@ class UserProvider extends ChangeNotifier {
 
   //update user
   Future<UserModel> updateUser(String bio, String mobile) async {
-    var url = Uri.parse('http://192.168.1.11:5000/users/update-profile');
+    var url = Uri.parse('${data_url}/users/update-profile');
     //String Userid = await storage.read(key: "id").toString();
 
     try {
