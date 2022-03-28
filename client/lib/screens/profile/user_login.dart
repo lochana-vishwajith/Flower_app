@@ -5,6 +5,8 @@ import 'package:client/screens/profile/user_profile_test.dart';
 import 'package:client/screens/profile/user_register.dart';
 import 'package:flutter/material.dart';
 
+import '../admin/admin_home.dart';
+
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
 
@@ -110,31 +112,37 @@ class _LoginPageState extends State<LoginPage> {
 
                       // UserModel data = await provider.registerUser(
                       //     username, password, email);
-
-                      provider.loginUser(username, password).then((value) {
-                        setState(() {
-                          _userModel = value;
-                        });
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Login Successfully'),
-                            duration: Duration(milliseconds: 1000),
-                          ),
-                        );
+                      if (username == "admin" && password == "admin") {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Home()));
-                      }).catchError((e) {
-                        print(e);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Login Failed'),
-                            duration: Duration(milliseconds: 1000),
-                          ),
-                        );
-                      });
+                                builder: (context) => const AdminHome()));
+                      } else {
+                        provider.loginUser(username, password).then((value) {
+                          setState(() {
+                            _userModel = value;
+                          });
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Login Successfully'),
+                              duration: Duration(milliseconds: 1000),
+                            ),
+                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
+                        }).catchError((e) {
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Login Failed'),
+                              duration: Duration(milliseconds: 1000),
+                            ),
+                          );
+                        });
+                      }
                     },
                     child: const Text(
                       'Sign In',
