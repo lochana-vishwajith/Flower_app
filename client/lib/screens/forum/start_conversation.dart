@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:client/Providers/forum_Item_provider..dart';
+import 'package:client/Providers/user_provider.dart';
 import 'package:client/models/forum_items.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,7 @@ class _StartConversationState extends State<StartConversation> {
   var description = '';
   bool isImageSelected = false;
   var imageUrl = '';
+  var userId = ForumItemProvider.uid;
   ForumItem? forumItem;
   final questionController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -192,7 +195,7 @@ class _StartConversationState extends State<StartConversation> {
                                 final isValid =
                                     formKey.currentState?.validate();
                                 if (isValid == true) {
-                                  forumProvider.postForumItem(context);
+                                  forumProvider.postForumItem(context, userId);
                                 }
                               },
                               icon: const Icon(Icons.post_add),

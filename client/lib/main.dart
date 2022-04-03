@@ -10,6 +10,7 @@ import 'package:client/screens/admin/flowerList.dart';
 import 'package:client/screens/forum/update_forum-question.dart';
 import 'package:client/screens/forum/viewQuestion.dart';
 import 'package:client/screens/home.dart';
+import 'package:client/screens/profile/user_login.dart';
 import 'package:client/screens/search/flowerView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         secondaryHeaderColor: Colors.white,
         scaffoldBackgroundColor: const Color.fromARGB(255, 254, 255, 222),
       ),
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
         '/': (context) => const Home(),
         '/adminList': (context) => const FlowerList(),
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         UpdateForum.routeName: ((context) => const UpdateForum()),
         FlowerUpdate.routeName: ((context) => const FlowerUpdate()),
         CreateDiary.routeName: (context) => const CreateDiary(),
+        LoginPage.routeName: ((context) => const LoginPage()),
         ViewDiary.routeName:(context) => const ViewDiary(),
         MyDiaries.routeName:(context)=>const  MyDiaries(),
         UpdateDiary.routeName:(context) =>const UpdateDiary(),

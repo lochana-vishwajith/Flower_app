@@ -33,7 +33,7 @@ Widget forumList(posts) {
 }
 
 Widget loadPosts() {
-  const String userId = '1';
+  var userId = ForumItemProvider.uid;
 
   return FutureBuilder(
       // future: Service.getFlowers(),

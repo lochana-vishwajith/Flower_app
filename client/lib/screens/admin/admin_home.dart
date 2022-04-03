@@ -1,5 +1,6 @@
 import 'package:client/screens/admin/flowerAdd.dart';
 import 'package:client/screens/admin/flowerList.dart';
+import 'package:client/screens/profile/user_login.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {
@@ -43,9 +44,10 @@ class _AdminHomeState extends State<AdminHome> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/adminHome');
+                // Navigator.pushNamed(context, '/adminHome');
+                Navigator.pushNamed(context, LoginPage.routeName);
               },
-              icon: Icon(Icons.admin_panel_settings_outlined))
+              icon: Icon(Icons.logout_rounded))
         ],
       ),
       body: screens[currentIndex],

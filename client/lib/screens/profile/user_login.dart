@@ -1,10 +1,15 @@
 import 'package:client/Providers/user_provider.dart';
 import 'package:client/models/user_model.dart';
+import 'package:client/screens/home.dart';
 import 'package:client/screens/profile/user_profile_test.dart';
 import 'package:client/screens/profile/user_register.dart';
 import 'package:flutter/material.dart';
 
+import '../admin/admin_home.dart';
+
 class LoginPage extends StatefulWidget {
+  static const String routeName = '/login';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -22,42 +27,43 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 150.0, 30.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(30.0, 150.0, 30.0, 0.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Welcome",
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "Enter username and password to signin",
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: new OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                      borderSide: const BorderSide(color: Colors.green),
                     ),
                     labelText: 'User Name',
                     hintText: 'Enter the username'),
                 controller: usernameController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: new OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                      borderSide: const BorderSide(color: Colors.green),
                     ),
                     labelText: 'Password',
                     hintText: 'Enter the password'),
@@ -66,10 +72,10 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 50,
                   ),
-                  Text(
+                  const Text(
                     "Don't have a account ?",
                     style: TextStyle(fontSize: 15),
                   ),
@@ -82,9 +88,9 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserRegister()));
+                                builder: (context) => const UserRegister()));
                       },
-                      child: Text(
+                      child: const Text(
                         'Sign Up',
                         style: TextStyle(color: Colors.green, fontSize: 15),
                       ),
@@ -106,33 +112,39 @@ class _LoginPageState extends State<LoginPage> {
 
                       // UserModel data = await provider.registerUser(
                       //     username, password, email);
-
-                      provider.loginUser(username, password).then((value) {
-                        setState(() {
-                          _userModel = value;
-                        });
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Login Successfully'),
-                            duration: Duration(milliseconds: 1000),
-                          ),
-                        );
+                      if (username == "admin" && password == "admin") {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserProfileTest()));
-                      }).catchError((e) {
-                        print(e);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Login Failed'),
-                            duration: Duration(milliseconds: 1000),
-                          ),
-                        );
-                      });
+                                builder: (context) => const AdminHome()));
+                      } else {
+                        provider.loginUser(username, password).then((value) {
+                          setState(() {
+                            _userModel = value;
+                          });
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Login Successfully'),
+                              duration: Duration(milliseconds: 1000),
+                            ),
+                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
+                        }).catchError((e) {
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Login Failed'),
+                              duration: Duration(milliseconds: 1000),
+                            ),
+                          );
+                        });
+                      }
                     },
-                    child: Text(
+                    child: const Text(
                       'Sign In',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
