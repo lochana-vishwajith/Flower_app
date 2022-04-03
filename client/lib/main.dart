@@ -53,7 +53,8 @@ class MyApp extends StatelessWidget {
         CreateDiary.routeName: (context) => const CreateDiary(),
         ViewDiary.routeName:(context) => const ViewDiary(),
         MyDiaries.routeName:(context)=>const  MyDiaries(),
-        UpdateDiary.routeName:(context) =>const UpdateDiary()
+        UpdateDiary.routeName:(context) =>const UpdateDiary(),
+
 
       },
     );

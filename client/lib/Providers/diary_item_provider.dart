@@ -12,6 +12,7 @@ class DiaryItemProvider extends ChangeNotifier {
   late String title;
   late String description;
   late String image;
+  late String keyword;
 
   List<DiaryItem> posts = [];
 
@@ -39,6 +40,15 @@ class DiaryItemProvider extends ChangeNotifier {
     return this.title;
   }
 
+  void setKeyword(String keyword) {
+    this.keyword = keyword;
+  }
+
+  String getKeyword() {
+    return this.keyword;
+  }
+
+
   void postDiaryItem(BuildContext context) async {
     print('title $title description $description');
     final response = await http.post(
@@ -49,6 +59,7 @@ class DiaryItemProvider extends ChangeNotifier {
         body: jsonEncode(<String, String>{
           'title': title,
           'description': description,
+          'keyword': keyword,
         }));
 
     if (response.statusCode == 200) {
@@ -135,7 +146,7 @@ class DiaryItemProvider extends ChangeNotifier {
     }
   }
 
-  void updateDiary(String id, String title, String description) async {
+  void updateDiary(String id, String title, String description,String keyword) async {
     final response = await http.put(
         Uri.parse('https://ctse-flowerapp.herokuapp.com/diary/$id'), //edit
         headers: <String, String>{
@@ -144,6 +155,7 @@ class DiaryItemProvider extends ChangeNotifier {
         body: jsonEncode(<String, String>{
           'title': title,
           'description': description,
+          'keyword': keyword,
         }));
 
     if (response.statusCode == 200) {

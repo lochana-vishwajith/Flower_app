@@ -52,6 +52,7 @@ class MyBlogSlidesComponent extends StatelessWidget {
                                     id: model!.id,
                                     title: model!.title,
                                     description: model!.description,
+                                    keyword: model!.keyword,
                                   ));
                             },
                           ),

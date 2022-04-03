@@ -15,6 +15,9 @@ const diarySchema = new mongoose.Schema({
     {type: String,
     required: false,}
 ],
+  keyword:{
+    type:String
+  }
 });
 
 

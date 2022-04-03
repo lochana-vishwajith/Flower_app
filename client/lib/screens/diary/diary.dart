@@ -18,7 +18,7 @@ class _DiaryState extends State<Diary> {
     super.initState();
   }
 
-  Widget DiaryList(posts) {
+  Widget diaryList(posts) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -49,7 +49,7 @@ class _DiaryState extends State<Diary> {
             AsyncSnapshot<List<DiaryItem>?> model,
             ) {
           if (model.hasData) {
-            return DiaryList(model.data);
+            return diaryList(model.data);
           }
           return const Center(
             child: CircularProgressIndicator(),

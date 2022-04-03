@@ -20,17 +20,20 @@ class _CreateDiaryState extends State<CreateDiary> {
 
   var tittle = '';
   var description = '';
+  var keyword='';
   bool isImageSelected = false;
   var image = '';
   DiaryItem? diaryItem;
   final tittleController = TextEditingController();
   final descriptionController = TextEditingController();
+  final keywordController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     tittleController.dispose();
     descriptionController.dispose();
+    keywordController.dispose();
   }
 
   @override
@@ -136,13 +139,25 @@ class _CreateDiaryState extends State<CreateDiary> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        flowerImagePicker(
-                            isImageSelected, diaryItem?.image ?? "", (file) {
-                          setState(() {
-                            diaryItem?.image = file.path;
-                            isImageSelected = true;
-                          });
-                        }),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: TextFormField(
+                            controller: keywordController,
+                            onChanged: (value) =>
+                            {diaryProvider.keyword = value},
+                            decoration: InputDecoration(
+                                labelText: "add keywords",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter A Keyword.";
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: TextFormField(
@@ -185,6 +200,13 @@ class _CreateDiaryState extends State<CreateDiary> {
                             },
                           ),
                         ),
+                        flowerImagePicker(
+                            isImageSelected, diaryItem?.image ?? "", (file) {
+                          setState(() {
+                            diaryItem?.image = file.path;
+                            isImageSelected = true;
+                          });
+                        }),
                         Padding(
                             padding: const EdgeInsets.all(5),
                             child: ElevatedButton.icon(

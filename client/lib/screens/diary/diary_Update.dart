@@ -17,14 +17,20 @@ class _UpdateDiaryState extends State<UpdateDiary> {
 
   var title = '';
   var description = '';
+  var keyword='';
 
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+  final keywordController = TextEditingController();
+
+
   @override
   void dispose() {
     super.dispose();
     titleController.dispose();
     descriptionController.dispose();
+    keywordController.dispose();
+
   }
 
   @override
@@ -40,9 +46,11 @@ class _UpdateDiaryState extends State<UpdateDiary> {
 
     final String? titleVal = args?.title;
     final String? descriptionVal = args?.description;
+    final String? keywordVal = args?.keyword;
 
     titleController.text = args!.title;
     descriptionController.text = args.description;
+    keywordController.text = args.keyword;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Update diary"),
@@ -62,6 +70,25 @@ class _UpdateDiaryState extends State<UpdateDiary> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: TextFormField(
+                            controller: keywordController,
+                            onChanged: (value) =>
+                            {diaryProvider.title = value},
+                            decoration: InputDecoration(
+                                labelText: "Keyword",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter A keyword.";
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: TextFormField(
@@ -116,6 +143,7 @@ class _UpdateDiaryState extends State<UpdateDiary> {
                                       "controller question ${titleController.text}");
                                   var updatedtitle = titleController.text;
                                   var updatedDes = descriptionController.text;
+                                  var updatedKey = keywordController.text;
 
                                   if (title == titleController.text) {
                                     updatedtitle = title;
@@ -125,9 +153,13 @@ class _UpdateDiaryState extends State<UpdateDiary> {
                                       descriptionController.text) {
                                     updatedDes = description;
                                   }
+                                  if (keyword==
+                                      keywordController.text) {
+                                    updatedKey = keyword;
+                                  }
 
                                   diaryProvider.updateDiary(
-                                      args.id, updatedtitle, updatedDes);
+                                      args.id, updatedtitle, updatedDes, updatedKey);
                                 }
                               },
                               icon: const Icon(Icons.post_add),
