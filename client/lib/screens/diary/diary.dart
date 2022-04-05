@@ -48,8 +48,12 @@ class _DiaryState extends State<Diary> {
             BuildContext context,
             AsyncSnapshot<List<DiaryItem>?> model,
             ) {
+          print('model ${model.data}');
           if (model.hasData) {
+            print("data thiyneawa");
+            print("${model.data} haved");
             return diaryList(model.data);
+
           }
           return const Center(
             child: CircularProgressIndicator(),

@@ -12,6 +12,8 @@ class MyDiaries extends StatefulWidget {
   State<MyDiaries> createState() => _MyDiariesState();
 }
 
+
+
 Widget diaryList(posts) {
   return SingleChildScrollView(
     child: Column(
@@ -34,10 +36,11 @@ Widget diaryList(posts) {
 
 Widget loadDiaries() {
 
+  var userId = DiaryItemProvider.uid;
 
   return FutureBuilder(
     // future: Service.getFlowers(),
-      future: DiaryItemProvider().getAllDiaryPosts(),
+      future: DiaryItemProvider().getUserDiaryPosts(userId),
       builder: (
           BuildContext context,
           AsyncSnapshot<List<DiaryItem>?> model,

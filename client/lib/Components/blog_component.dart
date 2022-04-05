@@ -9,25 +9,38 @@ class BlogComponent extends StatelessWidget {
   final DiaryItem? model;
   @override
   Widget build(BuildContext context) {
+    print('title ${model!.title}');
+    print('description${model!.description}');
+    print('date${model!.date}');
     return GestureDetector(
       onTap: () => {
-        // print("id ${model!.id}"),
-        // Navigator.of(context).pushNamed(ViewQuestions.routeName,
-        //     arguments: ForumItem(
-        //         id: model!.id,
-        //         question: model!.question,
-        //         description: model!.description))
+        print("id ${model!.id}"),
+        Navigator.of(context).pushNamed(ViewDiary.routeName,
+            arguments: DiaryItem(
+                id: model!.id,
+                title: model!.title,
+                date: model!.date,
+                keyword: model!.keyword,
+                description: model!.description))
       },
       child: Card(
+        color: Colors.lightGreenAccent,
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
         elevation: 10,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
+
+            children: [
             ListTile(
-              title: Text(model!.title),
+
+              title: Text(model!.title,
+                  style: const TextStyle(
+                      fontSize: 20.0, fontWeight: FontWeight.bold)),
+              subtitle: Text('${model!.keyword}'.toUpperCase(),style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+              leading:Icon(Icons.book,size: 50,color: Colors.black),
             )
+
           ],
         ),
       ),

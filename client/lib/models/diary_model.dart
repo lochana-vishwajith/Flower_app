@@ -11,12 +11,15 @@ class DiaryItem {
   String description;
   late String? image;
   String keyword;
+  String date;
+  late String likes;
 
   DiaryItem({
     required this.id,
     required this.title,
     required this.description,
     required this.keyword,
+    required this.date,
   });
 
   factory DiaryItem.fromJson(Map<String, dynamic> json) => DiaryItem(
@@ -24,6 +27,7 @@ class DiaryItem {
     title: json["title"],
     description: json["description"],
     keyword: json["keyword"],
+    date:json["date"]
   );
   Map<String, dynamic> toJson() => {
     "_id": id,

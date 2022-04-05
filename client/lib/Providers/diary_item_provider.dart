@@ -13,6 +13,8 @@ class DiaryItemProvider extends ChangeNotifier {
   late String description;
   late String image;
   late String keyword;
+  late String userId;
+  static String uid = '';
 
   List<DiaryItem> posts = [];
 
@@ -49,6 +51,17 @@ class DiaryItemProvider extends ChangeNotifier {
   }
 
 
+  String getuserId() {
+    return this.userId;
+  }
+
+  void setuserId(String userId) {
+    print('mage id $userId');
+    this.userId = userId;
+    uid = userId;
+  }
+
+
   void postDiaryItem(BuildContext context) async {
     print('title $title description $description');
     final response = await http.post(
@@ -60,6 +73,7 @@ class DiaryItemProvider extends ChangeNotifier {
           'title': title,
           'description': description,
           'keyword': keyword,
+          'userId': uid,
         }));
 
     if (response.statusCode == 200) {
@@ -97,7 +111,6 @@ class DiaryItemProvider extends ChangeNotifier {
 
     final response =
     await http.get(Uri.parse('https://ctse-flowerapp.herokuapp.com/diary')); //edit link
-
     if (response.statusCode == 200) {
       notifyListeners();
 
@@ -108,6 +121,7 @@ class DiaryItemProvider extends ChangeNotifier {
         var post = DiaryItem.fromJson(item);
         posts.add(post);
       }
+      print('posts $posts');
       return posts;
     } else {
       notifyListeners();
@@ -123,7 +137,7 @@ class DiaryItemProvider extends ChangeNotifier {
     posts.clear();
 
     final response = await http.get(
-        Uri.parse('https://ctse-flowerapp.herokuapp.com/diary/$id'));//edit link
+        Uri.parse('https://ctse-flowerapp.herokuapp.com/diary/userId/$id'));//edit link
 
     if (response.statusCode == 200) {
       notifyListeners();
@@ -170,4 +184,35 @@ class DiaryItemProvider extends ChangeNotifier {
       );
     }
   }
+
+
+  Future<List<DiaryItem>> searchDiary(String query) async {
+    print(query);
+    final response = await http
+        .get(Uri.parse('https://ctse-flowerapp.herokuapp.com/diary'));
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+
+      final List data = jsonDecode(response.body);
+
+      return data.map((json) => DiaryItem.fromJson(json)).where((diary) {
+        final title = diary.title.toLowerCase();
+        final sub = diary.keyword.toLowerCase();
+        final searchQuery = query.toLowerCase();
+
+        print(title);
+
+        return title.contains(searchQuery) || sub.contains(searchQuery);
+      }).toList();
+    } else {
+      notifyListeners();
+      throw Exception();
+      // Fluttertoast.showToast(msg: 'Error Loading Flower List');
+      // return flowers;
+    }
+  }
+
+
+
 }

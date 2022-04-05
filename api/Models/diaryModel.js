@@ -11,15 +11,16 @@ const diarySchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  image : [
-    {type: String,
-    required: false,}
-],
-  keyword:{
-    type:String
-  }
+  image: [{ type: String, required: false }],
+  keyword: {
+    type: String,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
 });
-
 
 const diary = mongoose.model("diaries", diarySchema);
 module.exports = diary;

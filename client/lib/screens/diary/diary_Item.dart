@@ -38,7 +38,7 @@ class _ViewDiaryState extends State<ViewDiary> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("View Post"),
+        title:  Text(args!.title),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -48,6 +48,11 @@ class _ViewDiaryState extends State<ViewDiary> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    Chip(
+                      label: Text('Keyword - ${args.keyword}'.toUpperCase(),
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
+                      ),
+                    ),
                     Center(
                       child: Image.network(
                         "https://www.babypillowth.com/images/templates/upload.png",
@@ -56,91 +61,38 @@ class _ViewDiaryState extends State<ViewDiary> {
                       ),
                     ),
                     Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(13.0)),
+                      shape:
+                      RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
                       elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ListTile(
-                              title: Text(args!.title),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+
+                        children: [
+                          ListTile(
+
+                            title: Text(args.date,
+                                style: const TextStyle(
+                                    fontSize: 20.0, fontWeight: FontWeight.bold)),
+                            tileColor: Colors.blueGrey,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              "POST CONTENT",
+                              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                             ),
-                            ListBody(
-                              children: [Text(args.description)],
-                            )
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            // width: MediaQuery.of(context).size.width - 160,
+                            child: Text(
+                              '${args.description}',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20.0),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Text(
-                        "Replies",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 150,
-                      child: SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(13.0)),
-                              elevation: 7,
-                              child: Padding(
-                                padding: const EdgeInsets.all(0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    ListTile(
-                                      title: Text(
-                                          "This shold be asked from an area agri office"),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )),
-                    ),
-                    Form(
-                        key: formKey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Row(mainAxisSize: MainAxisSize.min, children: [
-                            Expanded(
-                              flex: 3,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10)),
-                                    hintText: "Write a reply"),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Please Enter A Reply.";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 6),
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      final isValid =
-                                      formKey.currentState?.validate();
-                                    },
-                                    child: const Icon(Icons.send_outlined)),
-                              ),
-                            )
-                          ]),
-                        ))
                   ]),
                 )
               ],
