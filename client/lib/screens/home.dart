@@ -4,6 +4,8 @@ import 'package:client/screens/profile/profile.dart';
 import 'package:client/screens/search/search.dart';
 import 'package:flutter/material.dart';
 
+import 'diary/diarySearch.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _HomeState extends State<Home> {
   List screens = [
     Search(),
     Profile(),
-    Diary(),
+    DiarySearch(),
     Forum(),
   ];
   int currentIndex = 0;

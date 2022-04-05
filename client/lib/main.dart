@@ -14,10 +14,17 @@ import 'package:client/screens/profile/user_login.dart';
 import 'package:client/screens/search/flowerView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:client/screens/diary/diary_Add.dart';
+import 'package:client/Providers/diary_item_provider.dart';
+import 'package:client/screens/diary/diary_Item.dart';
+import 'package:client/screens/diary/diary_List.dart';
+import 'package:client/screens/diary/diary_Update.dart';
+
 
 void main() => runApp(MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => ForumItemProvider()),
-      ChangeNotifierProvider(create: (_) => FlowerItemProvider())
+      ChangeNotifierProvider(create: (_) => FlowerItemProvider()),
+      ChangeNotifierProvider(create: (_) => DiaryItemProvider())
     ], child: MyApp()));
 
 class MyApp extends StatelessWidget {
@@ -44,7 +51,13 @@ class MyApp extends StatelessWidget {
         '/adminHome': (context) => const AdminHome(),
         UpdateForum.routeName: ((context) => const UpdateForum()),
         FlowerUpdate.routeName: ((context) => const FlowerUpdate()),
+        CreateDiary.routeName: (context) => const CreateDiary(),
         LoginPage.routeName: ((context) => const LoginPage()),
+        ViewDiary.routeName:(context) => const ViewDiary(),
+        MyDiaries.routeName:(context)=>const  MyDiaries(),
+        UpdateDiary.routeName:(context) =>const UpdateDiary(),
+
+
       },
     );
   }

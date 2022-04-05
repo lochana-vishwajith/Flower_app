@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
   mydiaries: [
     { type: mongoose.Schema.Types.ObjectId, required: false, ref: "diaries" },
   ],
+  saveddiaries:[{type:mongoose.Schema.Types.ObjectId}]
 });
 
 userSchema.set("toJSON", {

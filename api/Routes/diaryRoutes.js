@@ -1,21 +1,21 @@
 const router = require("express").Router();
 const diary = require("../Models/diaryModel");
 
-router.post("/", (req, res) => {
-  console.log("diary");
-  const obj = req.body;
+// router.post("/", (req, res) => {
+//   console.log("diary");
+//   const obj = req.body;
 
-  const newDiary = new diary(obj);
+//   const newDiary = new diary(obj);
 
-  newDiary
-    .save()
-    .then((result) => {
-      res.status(200).send({ result });
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
-});
+//   newDiary
+//     .save()
+//     .then((result) => {
+//       res.status(200).send({ result });
+//     })
+//     .catch((err) => {
+//       res.status(500).send(err);
+//     });
+// });
 
 router.get("/", async (req, res) => {
   console.log("diary get");
@@ -97,3 +97,40 @@ router.put("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+//new post
+
+router.post("/", (req, res) => {
+  console.log(`forum post,${req.body.userId}`);
+  const { title, description, image, keyword, likes, userId } = req.body;
+
+  const diaryBlog = new diary({
+    title,
+    description,
+    image,
+    keyword,
+    userId,
+  });
+
+  diaryBlog
+    .save()
+    .then((result) => {
+      res.status(200).send({ result });
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+router.get("/userId/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  await diary
+    .find({ userId: userId })
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
