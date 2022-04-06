@@ -4,6 +4,7 @@ import 'package:client/screens/admin/admin_home.dart';
 import 'package:client/screens/admin/flowerAdd.dart';
 import 'package:client/screens/admin/flowerEntry.dart';
 import 'package:client/screens/admin/flowerUpdate.dart';
+import 'package:client/screens/diary/diary.dart';
 import 'package:client/screens/forum/my_posts.dart';
 import 'package:client/screens/forum/start_conversation.dart';
 import 'package:client/screens/admin/flowerList.dart';
@@ -19,6 +20,7 @@ import 'package:client/Providers/diary_item_provider.dart';
 import 'package:client/screens/diary/diary_Item.dart';
 import 'package:client/screens/diary/diary_List.dart';
 import 'package:client/screens/diary/diary_Update.dart';
+import 'package:client/screens/diary/diary.dart';
 
 
 void main() => runApp(MultiProvider(providers: [
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flower App',
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
@@ -56,6 +59,7 @@ class MyApp extends StatelessWidget {
         ViewDiary.routeName:(context) => const ViewDiary(),
         MyDiaries.routeName:(context)=>const  MyDiaries(),
         UpdateDiary.routeName:(context) =>const UpdateDiary(),
+        Diary.routeName:(context)=>const Diary()
 
 
       },

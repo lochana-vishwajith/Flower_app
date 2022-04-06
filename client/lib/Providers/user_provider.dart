@@ -1,3 +1,5 @@
+import 'package:client/Providers/diary_item_provider.dart';
+import 'package:client/Providers/forum_Item_provider..dart';
 import 'package:client/Providers/forum_Item_provider..dart';
 
 import 'package:flutter/foundation.dart';
@@ -13,6 +15,8 @@ class UserProvider extends ChangeNotifier {
   String local_data_url = "http://192.168.1.11:5000";
   final storage = new FlutterSecureStorage();
   ForumItemProvider forum = ForumItemProvider();
+  DiaryItemProvider diaryUser = DiaryItemProvider();
+
 
   //get user
   @override
@@ -125,6 +129,7 @@ class UserProvider extends ChangeNotifier {
         String? val = await storage.read(key: "id");
         String? val1 = await storage.read(key: "token");
         forum.setuserId(val as String);
+        diaryUser.setuserId(val as String);
         print("ID - ${val}");
         print("Token - ${val1}");
 

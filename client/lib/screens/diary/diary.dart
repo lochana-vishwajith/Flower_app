@@ -6,6 +6,7 @@ import 'package:client/screens/diary/diary_Add.dart';
 import 'package:client/screens/diary/diary_List.dart';
 
 class Diary extends StatefulWidget {
+  static const String routeName = '/user-diaries';
   const Diary({Key? key}) : super(key: key);
 
   @override
@@ -41,17 +42,15 @@ class _DiaryState extends State<Diary> {
   }
 
   Widget loadDiaries() {
+    var userId = DiaryItemProvider.uid;
+
     return FutureBuilder(
-      // future: Service.getFlowers(),
-        future: DiaryItemProvider().getAllDiaryPosts(),
+        future: DiaryItemProvider().getUserDiaryPosts(userId),
         builder: (
             BuildContext context,
             AsyncSnapshot<List<DiaryItem>?> model,
             ) {
-          print('model ${model.data}');
           if (model.hasData) {
-            print("data thiyneawa");
-            print("${model.data} haved");
             return diaryList(model.data);
 
           }
@@ -88,7 +87,7 @@ class _DiaryState extends State<Diary> {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: Container(
+                  child: SizedBox(
                     height: 30,
                     width: 100,
                     child: FloatingActionButton(

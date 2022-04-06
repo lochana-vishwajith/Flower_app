@@ -56,14 +56,12 @@ class DiaryItemProvider extends ChangeNotifier {
   }
 
   void setuserId(String userId) {
-    print('mage id $userId');
     this.userId = userId;
     uid = userId;
   }
 
 
   void postDiaryItem(BuildContext context) async {
-    print('title $title description $description');
     final response = await http.post(
         Uri.parse('https://ctse-flowerapp.herokuapp.com/diary'),//edit link
         headers: <String, String>{
@@ -84,7 +82,7 @@ class DiaryItemProvider extends ChangeNotifier {
     } else {
       notifyListeners();
       Fluttertoast.showToast(
-        msg: 'An Error Occured Please Re-Submit your Blog',
+        msg: 'An Error Occurred Try to Resubmit',
       );
     }
   }
@@ -115,18 +113,16 @@ class DiaryItemProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = jsonDecode(response.body) as List;
-      print("response $data");
 
       for (Map<String, dynamic> item in data) {
         var post = DiaryItem.fromJson(item);
         posts.add(post);
       }
-      print('posts $posts');
       return posts;
     } else {
       notifyListeners();
       Fluttertoast.showToast(
-        msg: 'An Error ocured',
+        msg: 'An Error occurred',
       );
 
       return posts;
@@ -136,6 +132,7 @@ class DiaryItemProvider extends ChangeNotifier {
   Future<List<DiaryItem>> getUserDiaryPosts(String id) async {
     posts.clear();
 
+
     final response = await http.get(
         Uri.parse('https://ctse-flowerapp.herokuapp.com/diary/userId/$id'));//edit link
 
@@ -143,7 +140,6 @@ class DiaryItemProvider extends ChangeNotifier {
       notifyListeners();
 
       final data = jsonDecode(response.body) as List;
-      print("response $data");
 
       for (Map<String, dynamic> item in data) {
         var post = DiaryItem.fromJson(item);
@@ -187,7 +183,6 @@ class DiaryItemProvider extends ChangeNotifier {
 
 
   Future<List<DiaryItem>> searchDiary(String query) async {
-    print(query);
     final response = await http
         .get(Uri.parse('https://ctse-flowerapp.herokuapp.com/diary'));
 
@@ -201,15 +196,12 @@ class DiaryItemProvider extends ChangeNotifier {
         final sub = diary.keyword.toLowerCase();
         final searchQuery = query.toLowerCase();
 
-        print(title);
 
         return title.contains(searchQuery) || sub.contains(searchQuery);
       }).toList();
     } else {
       notifyListeners();
       throw Exception();
-      // Fluttertoast.showToast(msg: 'Error Loading Flower List');
-      // return flowers;
     }
   }
 

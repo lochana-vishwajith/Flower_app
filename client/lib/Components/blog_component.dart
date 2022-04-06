@@ -1,6 +1,5 @@
 import 'package:client/models/diary_model.dart';
 import 'package:flutter/material.dart';
-
 import '../screens/diary/diary_Item.dart';
 
 class BlogComponent extends StatelessWidget {
@@ -9,12 +8,8 @@ class BlogComponent extends StatelessWidget {
   final DiaryItem? model;
   @override
   Widget build(BuildContext context) {
-    print('title ${model!.title}');
-    print('description${model!.description}');
-    print('date${model!.date}');
     return GestureDetector(
       onTap: () => {
-        print("id ${model!.id}"),
         Navigator.of(context).pushNamed(ViewDiary.routeName,
             arguments: DiaryItem(
                 id: model!.id,
@@ -24,7 +19,7 @@ class BlogComponent extends StatelessWidget {
                 description: model!.description))
       },
       child: Card(
-        color: Colors.lightGreenAccent,
+        color: Colors.lightGreenAccent.shade100,
         shape:
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(13.0)),
         elevation: 10,
@@ -37,8 +32,8 @@ class BlogComponent extends StatelessWidget {
               title: Text(model!.title,
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.bold)),
-              subtitle: Text('${model!.keyword}'.toUpperCase(),style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
-              leading:Icon(Icons.book,size: 50,color: Colors.black),
+              subtitle: Text(model!.keyword.toUpperCase(),style: const TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+              leading:const Icon(Icons.book,size: 50,color: Colors.green),
             )
 
           ],

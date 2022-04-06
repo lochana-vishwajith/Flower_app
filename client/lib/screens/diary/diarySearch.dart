@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:client/Providers/diary_item_provider.dart';
 import 'package:client/models/diary_model.dart';
 import 'package:client/screens/search/search_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../Components/blog_component.dart';
 
 
@@ -17,7 +15,6 @@ class DiarySearch extends StatefulWidget {
 
 class _DiarySearchState extends State<DiarySearch> {
   List<DiaryItem>? diaries = [];
-  // var isLoaded = false;
   String query = '';
   Timer? debouncer;
 
@@ -75,22 +72,6 @@ class _DiarySearchState extends State<DiarySearch> {
     );
   }
 
-  // Widget loadFlowers() {
-  //   return FutureBuilder(
-  //       future: FlowerItemProvider().getAllFlowers(),
-  //       builder: (
-  //         BuildContext context,
-  //         AsyncSnapshot<List<FlowerModel>?> model,
-  //       ) {
-  //         if (model.hasData) {
-  //           return flowerList(model.data);
-  //         }
-  //         return const Center(
-  //           child: CircularProgressIndicator(),
-  //         );
-  //       });
-  // }
-
   Widget searchBar() =>
       SearchWidget(text: query, onChanged: searchDiary, hint: 'Search diary');
 
@@ -113,22 +94,9 @@ class _DiarySearchState extends State<DiarySearch> {
           child: Column(
             children: <Widget>[
               searchBar(),
-              // loadFlowers(),
               diaryList(diaries),
-              // Expanded(
-              //     child: ListView.builder(
-              //         itemCount: flowers!.length,
-              //         itemBuilder: (context, index) {
-              //           final flower = flowers![index];
-              //           return buildFlower(flower);
-              //         }))
             ],
           ),
         ));
   }
-
-// Widget buildFlower(FlowerModel flower) => ListTile(
-//       title: Text(flower.genus!),
-//       subtitle: Text(flower.family!),
-//     );
 }

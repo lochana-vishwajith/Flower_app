@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:client/Providers/user_provider.dart';
 import 'package:client/models/user_model.dart';
+import 'package:client/screens/diary/diary_List.dart';
 import 'package:client/screens/profile/update_profile.dart';
 import 'package:client/screens/profile/user_login.dart';
 import 'package:flutter/material.dart';
@@ -190,7 +191,11 @@ class _UserProfileTestState extends State<UserProfileTest> {
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(10)),
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(MyDiaries.routeName);
+
+                              },
                               child: Text(
                                 'My Diaries',
                                 style: TextStyle(

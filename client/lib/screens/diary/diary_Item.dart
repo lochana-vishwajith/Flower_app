@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-//import '../../Providers/forum_Item_provider..dart';
-//import '../../models/forum_items.dart';
-
-import '../../Providers/diary_item_provider.dart';
 import '../../models/diary_model.dart';
 
 class ViewDiary extends StatefulWidget {
@@ -31,8 +25,6 @@ class _ViewDiaryState extends State<ViewDiary> {
 
   @override
   Widget build(BuildContext context) {
-    final diaryProvider = context.read<DiaryItemProvider>();
-
     final DiaryItem? args =
     ModalRoute.of(context)!.settings.arguments as DiaryItem?;
 
@@ -40,6 +32,7 @@ class _ViewDiaryState extends State<ViewDiary> {
       appBar: AppBar(
         title:  Text(args!.title),
       ),
+      backgroundColor: Colors.lightGreenAccent.shade100,
       body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -50,7 +43,7 @@ class _ViewDiaryState extends State<ViewDiary> {
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
                     Chip(
                       label: Text('Keyword - ${args.keyword}'.toUpperCase(),
-                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                       ),
                     ),
                     Center(
@@ -78,14 +71,14 @@ class _ViewDiaryState extends State<ViewDiary> {
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "POST CONTENT",
+                              "BLOG CONTENT",
                               style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                             ),
                           ),
                           SizedBox(
                             // width: MediaQuery.of(context).size.width - 160,
                             child: Text(
-                              '${args.description}',
+                              args.description,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20.0),
                             ),
