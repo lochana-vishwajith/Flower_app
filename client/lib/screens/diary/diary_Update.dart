@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:client/Providers/diary_item_provider.dart';
 import 'package:client/models/diary_model.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +98,7 @@ class _UpdateDiaryState extends State<UpdateDiary> {
                             onChanged: (value) =>
                             {diaryProvider.title = value},
                             decoration: InputDecoration(
-                                labelText: "Your Question",
+                                labelText: "Blog Title",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10))),
                             validator: (value) {
@@ -138,9 +140,6 @@ class _UpdateDiaryState extends State<UpdateDiary> {
                                 final isValid =
                                 formKey.currentState?.validate();
                                 if (isValid == true) {
-                                  print("title $title");
-                                  print(
-                                      "controller question ${titleController.text}");
                                   var updatedtitle = titleController.text;
                                   var updatedDes = descriptionController.text;
                                   var updatedKey = keywordController.text;
@@ -160,10 +159,15 @@ class _UpdateDiaryState extends State<UpdateDiary> {
 
                                   diaryProvider.updateDiary(
                                       args.id, updatedtitle, updatedDes, updatedKey);
+
+                                  Timer(const Duration(seconds:1), () {
+                                    Navigator.of(context)
+                                        .pushNamed('/');
+                                  });
                                 }
                               },
                               icon: const Icon(Icons.post_add),
-                              label: const Text("Update Post"),
+                              label: const Text("Update Your Blog Post"),
                               style: ElevatedButton.styleFrom(
                                 primary:
                                 const Color.fromARGB(255, 121, 180, 112),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:client/Providers/diary_item_provider.dart';
@@ -215,6 +216,10 @@ class _CreateDiaryState extends State<CreateDiary> {
                                 formKey.currentState?.validate();
                                 if (isValid == true) {
                                   diaryProvider.postDiaryItem(context);
+                                  Timer(const Duration(seconds:1), () {
+                                    Navigator.of(context)
+                                        .pushNamed('/');
+                                  });
                                 }
                               },
                               icon: const Icon(Icons.post_add),

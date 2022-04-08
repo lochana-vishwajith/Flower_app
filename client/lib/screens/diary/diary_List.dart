@@ -1,8 +1,9 @@
 import 'package:client/Components/my_blog_slides.dart';
 import 'package:flutter/material.dart';
-
 import '../../Providers/diary_item_provider.dart';
 import '../../models/diary_model.dart';
+import 'diary_Add.dart';
+
 
 class MyDiaries extends StatefulWidget {
   static const String routeName = '/my_diary';
@@ -60,6 +61,28 @@ class _MyDiariesState extends State<MyDiaries> {
     return Scaffold(
       appBar: AppBar(title: const Text("My Posts")),
       body: loadDiaries(),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(CreateDiary.routeName);
+                    },
+                    backgroundColor: const Color.fromARGB(255, 50, 59, 190),
+                    splashColor: const Color.fromARGB(255, 116, 114, 214),
+                    hoverColor: const Color.fromARGB(255, 6, 24, 58),
+                    foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    elevation: 12,
+                    tooltip: 'Add a new Blog Post ',
+                    child: const Icon(Icons.add)),
+              ),
+            ],
+          ),
+        )
     );
   }
 }
